@@ -31,6 +31,15 @@ void Back_Week1_DrawBG(StageBack *back)
 	//Draw curtains
 	fx = stage.camera.x;
 	fy = stage.camera.y;
+
+	RECT tree_src = {0, 0, 74, 256};
+	RECT_FIXED tree_dst = {FIXED_DEC(0,1) - fx, FIXED_DEC(0,1) - fy, FIXED_DEC(tree_src.w,1), FIXED_DEC(tree_src.h,1)}; 
+	
+	Stage_DrawTex(&this->tex_back0, &tree_src, &tree_dst, stage.camera.bzoom);
+	tree_src.x = 74;
+	tree_src.w = 62;
+	tree_dst.w = FIXED_DEC(tree_src.w,1);
+	Stage_DrawTex(&this->tex_back0, &tree_src, &tree_dst, stage.camera.bzoom);
 }
 
 void Back_Week1_Free(StageBack *back)
@@ -57,7 +66,6 @@ StageBack *Back_Week1_New(void)
 	//Load background textures
 	IO_Data arc_back = IO_Read("\\WEEK1\\BACK.ARC;1");
 	Gfx_LoadTex(&this->tex_back0, Archive_Find(arc_back, "back0.tim"), 0);
-	Gfx_LoadTex(&this->tex_back1, Archive_Find(arc_back, "back1.tim"), 0);
 	Mem_Free(arc_back);
 	
 	Gfx_SetClear(154, 217, 234);
