@@ -4,12 +4,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#ifndef PSXF_GUARD_DAD_H
-#define PSXF_GUARD_DAD_H
+#ifndef PSXF_GUARD_TAILS_H
+#define PSXF_GUARD_TAILS_H
 
 #include "../character.h"
 
-//Dad character functions
-Character *Char_Dad_New(fixed_t x, fixed_t y);
+//tails character functions
+Character *Char_tails_New(fixed_t x, fixed_t y);
 
 #endif

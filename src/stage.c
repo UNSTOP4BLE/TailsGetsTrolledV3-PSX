@@ -53,7 +53,7 @@ int drawshit;
 
 #include "character/bf.h"
 #include "character/bfweeb.h"
-#include "character/dad.h"
+#include "character/tails.h"
 #include "character/spook.h"
 #include "character/pico.h"
 #include "character/mom.h"

@@ -93,8 +93,8 @@
 				<file name = "bfdead.arc" type = "data" source = "iso/bf/dead.arc"/>
 				<file name = "bfweeb.arc" type = "data" source = "iso/bf/weeb.arc"/>
 				
-				<!-- Dad assets -->
-				<file name = "dad.arc" type = "data" source = "iso/dad/main.arc"/>
+				<!-- tails assets -->
+				<file name = "tails.arc" type = "data" source = "iso/tails/main.arc"/>
 				
 				<!-- Spook assets -->
 				<file name = "spook.arc" type = "data" source = "iso/spook/main.arc"/>
