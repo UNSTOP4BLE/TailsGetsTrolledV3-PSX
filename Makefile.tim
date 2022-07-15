@@ -108,7 +108,6 @@ iso/week3/back.arc: iso/week3/back0.tim iso/week3/back1.tim iso/week3/back2.tim 
 
 # Week 4
 iso/week4/back.arc: iso/week4/back0.tim 
-iso/week4/hench.arc: iso/week4/hench0.tim iso/week4/hench1.tim
 
 # Week 5
 iso/week5/back.arc: iso/week5/back0.tim iso/week5/back1.tim iso/week5/back2.tim iso/week5/back3.tim iso/week5/back4.tim iso/week5/back5.tim iso/week5/back6.tim 

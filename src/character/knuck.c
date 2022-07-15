@@ -50,30 +50,30 @@ typedef struct
 
 //knuck character definitions
 static const CharFrame char_knuck_frame[] = {
-	{knuck_ArcMain_Idle0, {  0,   0, 152, 143}, {  0,   0}},
-	{knuck_ArcMain_Idle1, {  0,   0, 152, 139}, {  0,   0}},
-	{knuck_ArcMain_Idle2, {  0,   0, 152, 140}, {  0,   0}},
-	{knuck_ArcMain_Idle3, {  0,   0, 152, 141}, {  0,   0}},
-	{knuck_ArcMain_Idle4, {  0,   0, 154, 143}, {  0,   0}},
-	{knuck_ArcMain_Idle5, {  0,   0, 154, 144}, {  0,   0}},
+	{knuck_ArcMain_Idle0, {  0,   0, 152, 143}, { 86, 143}},
+	{knuck_ArcMain_Idle1, {  0,   0, 152, 139}, { 86, 139}},
+	{knuck_ArcMain_Idle2, {  0,   0, 152, 140}, { 84, 140}},
+	{knuck_ArcMain_Idle3, {  0,   0, 152, 141}, { 83, 140}},
+	{knuck_ArcMain_Idle4, {  0,   0, 154, 143}, { 86, 142}},
+	{knuck_ArcMain_Idle5, {  0,   0, 154, 144}, { 87, 143}},
 	
-	{knuck_ArcMain_Left0, {  0,   0, 182, 169}, {  0,   0}},
-	{knuck_ArcMain_Left1, {  0,   0, 178, 174}, {  0,   0}},
-	{knuck_ArcMain_Left2, {  0,   0, 170, 188}, {  0,   0}},
-	{knuck_ArcMain_Left3, {  0,   0, 164, 186}, {  0,   0}},
+	{knuck_ArcMain_Left0, {  0,   0, 182, 169}, { 66, 169}},
+	{knuck_ArcMain_Left1, {  0,   0, 178, 174}, { 66, 174}},
+	{knuck_ArcMain_Left2, {  0,   0, 170, 188}, { 64, 188}},
+	{knuck_ArcMain_Left3, {  0,   0, 164, 186}, { 63, 186}},
 
-	{knuck_ArcMain_Down0, {  0,   0, 150, 137}, {  0,   0}},
-	{knuck_ArcMain_Down0, {105, 117, 151, 139}, {  0,   0}},
-	{knuck_ArcMain_Down1, {  0,   0, 152, 139}, {  0,   0}}, 
+	{knuck_ArcMain_Down0, {  0,   0, 150, 137}, { 64, 137}},
+	{knuck_ArcMain_Down0, {105, 117, 151, 139}, { 65, 139}},
+	{knuck_ArcMain_Down1, {  0,   0, 152, 139}, { 65, 139}}, 
 	
-	{knuck_ArcMain_Up0, {  0,   0, 138, 237}, {  0,   0}},
-	{knuck_ArcMain_Up1, {  0,   0, 138, 245}, {  0,   0}}, 
-	{knuck_ArcMain_Up2, {  0,   0, 134, 243}, {  0,   0}},
+	{knuck_ArcMain_Up0, {  0,   0, 138, 237}, { 54, 237}},
+	{knuck_ArcMain_Up1, {  0,   0, 138, 245}, { 52, 245}}, 
+	{knuck_ArcMain_Up2, {  0,   0, 134, 243}, { 53, 243}},
 	
-	{knuck_ArcMain_Right0, {  0,   0, 115, 160}, {  0,   0}},
-	{knuck_ArcMain_Right0, {115,   0, 113, 160}, {  0,   0}}, 
-	{knuck_ArcMain_Right1, {  0,   0, 112, 160}, {  0,   0}},
-	{knuck_ArcMain_Right1, {112,   0, 112, 160}, {  0,   0}}, 
+	{knuck_ArcMain_Right0, {  0,   0, 115, 160}, { 43, 160}},
+	{knuck_ArcMain_Right0, {115,   0, 113, 160}, { 42, 160}}, 
+	{knuck_ArcMain_Right1, {  0,   0, 112, 160}, { 42, 160}},
+	{knuck_ArcMain_Right1, {112,   0, 112, 160}, { 41, 160}}, 
 };
 
 static const Animation char_knuck_anim[CharAnim_Max] = {

@@ -58,7 +58,7 @@
 		{NULL},
 		
 		//Stage background
-		Back_Week1_New,
+		Back_Week4_New,
 		
 		//Song info
 		{FIXED_DEC(1,1),FIXED_DEC(27,10),FIXED_DEC(1,1)},
