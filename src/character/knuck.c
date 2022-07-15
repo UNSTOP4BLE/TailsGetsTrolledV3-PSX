@@ -66,11 +66,14 @@ static const CharFrame char_knuck_frame[] = {
 	{knuck_ArcMain_Down0, {105, 117, 151, 139}, {  0,   0}},
 	{knuck_ArcMain_Down1, {  0,   0, 152, 139}, {  0,   0}}, 
 	
-	{knuck_ArcMain_Up1, {  0,   0, 105, 164}, { 35, 163}}, //8 up 1
-	{knuck_ArcMain_Up1, {105,   0, 105, 164}, { 34, 162}}, //9 up 2
+	{knuck_ArcMain_Up0, {  0,   0, 138, 237}, {  0,   0}},
+	{knuck_ArcMain_Up1, {  0,   0, 138, 245}, {  0,   0}}, 
+	{knuck_ArcMain_Up2, {  0,   0, 134, 243}, {  0,   0}},
 	
-	{knuck_ArcMain_Right1, {  0,   0, 117, 152}, { 43, 150}}, //10 right 1
-	{knuck_ArcMain_Right1, {117,   0, 117, 152}, { 41, 151}}, //11 right 2
+	{knuck_ArcMain_Right0, {  0,   0, 115, 160}, {  0,   0}},
+	{knuck_ArcMain_Right0, {115,   0, 113, 160}, {  0,   0}}, 
+	{knuck_ArcMain_Right1, {  0,   0, 112, 160}, {  0,   0}},
+	{knuck_ArcMain_Right1, {112,   0, 112, 160}, {  0,   0}}, 
 };
 
 static const Animation char_knuck_anim[CharAnim_Max] = {
@@ -79,9 +82,9 @@ static const Animation char_knuck_anim[CharAnim_Max] = {
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
 	{2, (const u8[]){ 10, 11, 12, ASCR_BACK, 0}},         //CharAnim_Down
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_DownAlt
-	{2, (const u8[]){ 8,  9, ASCR_BACK, 0}},         //CharAnim_Up
+	{2, (const u8[]){ 13, 14, 15, ASCR_BACK, 0}},         //CharAnim_Up
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
-	{2, (const u8[]){10, 11, ASCR_BACK, 0}},         //CharAnim_Right
+	{2, (const u8[]){ 16, 17, 18, 19, ASCR_BACK, 0}},         //CharAnim_Right
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_RightAlt
 };
 
