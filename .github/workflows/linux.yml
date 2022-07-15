@@ -38,12 +38,7 @@ jobs:
           sudo apt-get install ffmpeg
           sudo apt-get install libavformat-dev
           wget https://download1515.mediafire.com/yiskdz62pfzg/7zeyfstxyg66kn2/licensea.dat
-          make
-          make -f Makefile.tools -j8
-          make -f Makefile.tim -j8
-          make -f Makefile.cht -j8
-          make -f Makefile.xa -j8
-          mkpsxiso -y funkin.xml
+          make -f Makefile.assets -j8
           mkdir export
           mv TailsGetsTrolledPSX.bin export
           mv TailsGetsTrolledPSX.cue export
