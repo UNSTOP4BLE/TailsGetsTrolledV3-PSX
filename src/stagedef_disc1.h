@@ -1,4 +1,4 @@
-	{ //StageId_1_1 (talentless fox)
+	{ //StageId_1_1 (Talentless Fox)
 		//Characters
 		{Char_BF_New,    FIXED_DEC(60,1),  FIXED_DEC(100,1)},
 		{Char_tails_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
@@ -15,10 +15,10 @@
 		
 		StageId_1_2, STAGE_LOAD_FLAG
 	},
-	{ //StageId_1_2 (no-villains)
+	{ //StageId_1_2 (No Villains)
 		//Characters
 		{Char_BF_New,    FIXED_DEC(60,1),  FIXED_DEC(100,1)},
-		{Char_tails_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
+		{Char_Sonic_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
         {NULL},
 		{Char_GF_New,     FIXED_DEC(0,1),  FIXED_DEC(-10,1)},
 		
@@ -32,7 +32,7 @@
 		
 		StageId_1_3, STAGE_LOAD_FLAG
 	},
-	{ //StageId_1_3 (die-batsards)
+	{ //StageId_1_3 (Die Bastards)
 		//Characters
 		{Char_BF_New,    FIXED_DEC(60,1),  FIXED_DEC(100,1)},
 		{Char_tails_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
@@ -50,7 +50,7 @@
 		StageId_1_3, 0
 	},
 	
-	{ //StageId_2_1 (high-shovel)
+	{ //StageId_2_1 (High Shovel)
 		//Characters
 		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
 		{Char_knuck_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
@@ -67,7 +67,7 @@
 		
 		StageId_2_2, STAGE_LOAD_FLAG
 	},
-	{ //StageId_2_2 (taste-for-blood)
+	{ //StageId_2_2 (Taste For Blood)
 		//Characters
 		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
 		{Char_knuck_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
@@ -84,7 +84,7 @@
 		
 		StageId_2_3, STAGE_LOAD_FLAG | STAGE_LOAD_OPPONENT
 	},
-	{ //StageId_2_3 (tsuraran-fox)
+	{ //StageId_2_3 (Tsuraran Fox)
 		//Characters
 		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
 		{Char_Monster_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
@@ -102,10 +102,10 @@
 		StageId_2_3, 0
 	},
 	
-	{ //StageId_3_1 (no-heroes)
+	{ //StageId_3_1 (No Heroes)
 		//Characters
 		{Char_BF_New,     FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_Pico_New, FIXED_DEC(-105,1),   FIXED_DEC(85,1)},
+		{Char_Sonic_New, FIXED_DEC(-105,1),   FIXED_DEC(85,1)},
         {NULL},
 		{Char_GF_New,      FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
 		
@@ -119,10 +119,10 @@
 		
 		StageId_3_2, STAGE_LOAD_FLAG
 	},
-	{ //StageId_3_2 (no-bitches-matasaki)
+	{ //StageId_3_2 (No Bitches Matasaki)
 		//Characters
 		{Char_BF_New,     FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_Pico_New, FIXED_DEC(-105,1),   FIXED_DEC(85,1)},
+		{Char_Sonic_New, FIXED_DEC(-105,1),   FIXED_DEC(85,1)},
         {NULL},
 		{Char_GF_New,      FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
 		
@@ -136,10 +136,10 @@
 		
 		StageId_3_3, STAGE_LOAD_FLAG
 	},
-	{ //StageId_3_3 (no-bitches-penkaru)
+	{ //StageId_3_3 (No Bitches Penkaru)
 		//Characters
 		{Char_BF_New,     FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_Pico_New, FIXED_DEC(-105,1),   FIXED_DEC(85,1)},
+		{Char_Sonic_New, FIXED_DEC(-105,1),   FIXED_DEC(85,1)},
         {NULL},
 		{Char_GF_New,      FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
 		
@@ -154,7 +154,7 @@
 		StageId_3_3, 0
 	},
 	
-	{ //StageId_4_1 (groovy-fox)
+	{ //StageId_4_1 (Groovy Fox)
 		//Characters
 		{Char_BF_New,   FIXED_DEC(120,1),   FIXED_DEC(40,1)},
 		{Char_Mom_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},

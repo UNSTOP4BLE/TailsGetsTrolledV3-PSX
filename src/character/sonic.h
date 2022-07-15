@@ -4,12 +4,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#ifndef PSXF_GUARD_PICO_H
-#define PSXF_GUARD_PICO_H
+#ifndef PSXF_GUARD_SONIC_H
+#define PSXF_GUARD_SONIC_H
 
 #include "../character.h"
 
-//Pico character functions
-Character *Char_Pico_New(fixed_t x, fixed_t y);
+//Sonic character functions
+Character *Char_Sonic_New(fixed_t x, fixed_t y);
 
 #endif

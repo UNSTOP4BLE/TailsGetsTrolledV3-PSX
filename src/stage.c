@@ -50,8 +50,8 @@ int drawshit;
 #include "character/bf.h"
 #include "character/bfweeb.h"
 #include "character/tails.h"
+#include "character/sonic.h"
 #include "character/knuck.h"
-#include "character/pico.h"
 #include "character/mom.h"
 #include "character/xmasp.h"
 #include "character/monster.h"
@@ -788,7 +788,7 @@ static void Stage_Opponent2(void)
 	static char* checkoption;
 
 	//change mode to single(only opponent2 sing)
-  if (strcmp(stage.oppo2sing, "single") == 0 && checkoption != stage.oppo2sing)
+  if (stage.opponent2 != NULL && strcmp(stage.oppo2sing, "single") == 0 && checkoption != stage.oppo2sing)
 	{
 		if (stage.mode == StageMode_Swap)
 		{
@@ -803,7 +803,7 @@ static void Stage_Opponent2(void)
 	}
 
 	//change mode to none (opponent2 don't sing)
-   else if (strcmp(stage.oppo2sing, "none") == 0 && checkoption != stage.oppo2sing)
+   else if (stage.opponent2 != NULL && strcmp(stage.oppo2sing, "none") == 0 && checkoption != stage.oppo2sing)
 	{
 		if (stage.mode == StageMode_Swap)
 		{

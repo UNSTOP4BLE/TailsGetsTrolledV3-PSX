@@ -93,17 +93,17 @@
 				<file name = "bfdead.arc" type = "data" source = "iso/bf/dead.arc"/>
 				<file name = "bfweeb.arc" type = "data" source = "iso/bf/weeb.arc"/>
 				
-				<!-- tails assets -->
+				<!-- Tails assets -->
 				<file name = "tails.arc" type = "data" source = "iso/tails/main.arc"/>
+
+				<!-- Sonic assets -->
+				<file name = "sonic.arc" type = "data" source = "iso/sonic/main.arc"/>
 				
-				<!-- Spook assets -->
+				<!-- Knuckles assets -->
 				<file name = "knuck.arc" type = "data" source = "iso/knuck/main.arc"/>
 
 				<!-- Monster assets -->
 				<file name = "monster.arc" type = "data" source = "iso/monster/main.arc"/>
-				
-				<!-- Pico assets -->
-				<file name = "pico.arc" type = "data" source = "iso/pico/main.arc"/>
 				
 				<!-- Mom assets -->
 				<file name = "mom.arc" type = "data" source = "iso/mom/main.arc"/>
