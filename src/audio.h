@@ -34,7 +34,6 @@ typedef enum
 	XA_Fresh,   //Fresh
 	//WEEK1B.XA
 	XA_Dadbattle, //DadBattle
-	XA_Tutorial,  //Tutorial
 	//WEEK2A.XA
 	XA_Spookeez, //Spookeez
 	XA_South,    //South

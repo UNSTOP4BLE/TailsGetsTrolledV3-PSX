@@ -1,4 +1,4 @@
-#define XA_LENGTH(x) (((u64)(x) * 75) / 100 * IO_SECT_SIZE) //Centiseconds to sectors in bytes (w)
+#define XA_LENGTH(x) (((u64)(x) * 75) * IO_SECT_SIZE) //Seconds to sectors in bytes (w)
 
 typedef struct
 {
@@ -8,26 +8,25 @@ typedef struct
 
 static const XA_TrackDef xa_tracks[] = {
 	//MENU.XA
-	{XA_Menu, XA_LENGTH(11300)}, //XA_GettinFreaky
-	{XA_Menu, XA_LENGTH(3800)},  //XA_GameOver
+	{XA_Menu, XA_LENGTH(113)}, //XA_GettinFreaky
+	{XA_Menu, XA_LENGTH(38)},  //XA_GameOver
 	//WEEK1A.XA
-	{XA_Week1A, XA_LENGTH(7700)}, //XA_Bopeebo
-	{XA_Week1A, XA_LENGTH(8000)}, //XA_Fresh
+	{XA_Week1A, XA_LENGTH(170)}, //XA_Bopeebo
+	{XA_Week1A, XA_LENGTH(165)}, //XA_Fresh
 	//WEEK1B.XA
-	{XA_Week1B, XA_LENGTH(8700)}, //XA_Dadbattle
-	{XA_Week1B, XA_LENGTH(6800)}, //XA_Tutorial
+	{XA_Week1B, XA_LENGTH(171)}, //XA_Dadbattle
 	//WEEK2A.XA
-	{XA_Week2A, XA_LENGTH(9900)}, //XA_Spookeez
-	{XA_Week2A, XA_LENGTH(8900)}, //XA_South
+	{XA_Week2A, XA_LENGTH(144)}, //XA_Spookeez
+	{XA_Week2A, XA_LENGTH(174)}, //XA_South
 	//WEEK2B.XA
-	{XA_Week2B, XA_LENGTH(17800)}, //XA_Monster
+	{XA_Week2B, XA_LENGTH(252)}, //XA_Monster
 	//WEEK3A.XA
-	{XA_Week3A, XA_LENGTH(8400)},  //XA_Pico
-	{XA_Week3A, XA_LENGTH(10000)}, //XA_Philly
+	{XA_Week3A, XA_LENGTH(149)},  //XA_Pico
+	{XA_Week3A, XA_LENGTH(169)}, //XA_Philly
 	//WEEK3B.XA
-	{XA_Week3B, XA_LENGTH(10700)}, //XA_Blammed
+	{XA_Week3B, XA_LENGTH(170)}, //XA_Blammed
 	//WEEK4A.XA
-	{XA_Week4A, XA_LENGTH(9300)},  //XA_SatinPanties
+	{XA_Week4A, XA_LENGTH(169)},  //XA_SatinPanties
 };
 
 static const char *xa_paths[] = {
@@ -57,7 +56,6 @@ static const XA_Mp3 xa_mp3s[] = {
 	{"fresh", true},   //XA_Fresh
 	//WEEK1B.XA
 	{"dadbattle", true}, //XA_Dadbattle
-	{"tutorial", false}, //XA_Tutorial
 	//WEEK2A.XA
 	{"spookeez", true}, //XA_Spookeez
 	{"south", true},    //XA_South

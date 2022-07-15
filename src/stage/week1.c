@@ -43,23 +43,32 @@ void Back_Week1_DrawBG(StageBack *back)
 	Back_Week1 *this = (Back_Week1*)back;
 	
 	fixed_t fx, fy;
-	
-	//Draw curtains
-	fx = stage.camera.x;
-	fy = stage.camera.y;
 
-	RECT_FIXED grass_dst = {FIXED_DEC(-229,1) - fx, FIXED_DEC(44,1) - fy, FIXED_DEC(205,1), FIXED_DEC(11,1)}; 
-	Debug_StageMoveDebug(&grass_dst,7,fx,fy);
-	DrawGrass(this->tex_back0, grass_dst);
+	//Draw bg
+	fx = stage.camera.x * 13 / 10;
+	fy = stage.camera.y * 13 / 10;
 
+	RECT_FIXED grass_dst = {FIXED_DEC(-229,1) - stage.camera.x, FIXED_DEC(44,1) - stage.camera.y, FIXED_DEC(205,1), FIXED_DEC(11,1)}; 
 	RECT tree_src = {0, 0, 74, 256};
-	RECT_FIXED tree_dst = {FIXED_DEC(0,1) - fx, FIXED_DEC(0,1) - fy, FIXED_DEC(tree_src.w,1), FIXED_DEC(tree_src.h,1)}; 
+	RECT_FIXED tree_dst = {FIXED_DEC(-266,1) - fx, FIXED_DEC(-144,1) - fy, FIXED_DEC(tree_src.w,1), FIXED_DEC(tree_src.h,1)}; 
 	
+	Debug_StageMoveDebug(&grass_dst, 4, stage.camera.x, stage.camera.y);
+	if (stage.widescreen)
+	{
+		tree_dst.x = FIXED_DEC(-357,1) - fx;
+		grass_dst.x = FIXED_DEC(-305,1) - stage.camera.x;
+		grass_dst.w = FIXED_DEC(263,1);
+	}
 	Stage_DrawTex(&this->tex_back0, &tree_src, &tree_dst, stage.camera.bzoom);
 	tree_src.x = 74;
 	tree_src.w = 62;
 	tree_dst.w = FIXED_DEC(tree_src.w,1);
+	tree_dst.x = FIXED_DEC(136,1) - fx;
+	tree_dst.y = FIXED_DEC(-87,1) - fy;
+	if (stage.widescreen)
+		tree_dst.x = FIXED_DEC(235,1) - fx;
 	Stage_DrawTex(&this->tex_back0, &tree_src, &tree_dst, stage.camera.bzoom);
+	DrawGrass(this->tex_back0, grass_dst);
 }
 
 void Back_Week1_Free(StageBack *back)
