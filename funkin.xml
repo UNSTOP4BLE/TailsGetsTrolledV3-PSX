@@ -97,7 +97,7 @@
 				<file name = "tails.arc" type = "data" source = "iso/tails/main.arc"/>
 				
 				<!-- Spook assets -->
-				<file name = "spook.arc" type = "data" source = "iso/spook/main.arc"/>
+				<file name = "knuck.arc" type = "data" source = "iso/knuck/main.arc"/>
 
 				<!-- Monster assets -->
 				<file name = "monster.arc" type = "data" source = "iso/monster/main.arc"/>
