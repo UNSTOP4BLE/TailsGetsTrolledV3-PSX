@@ -55,10 +55,10 @@
 		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
 		{Char_knuck_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
         {NULL},
-		{Char_GF_New,       FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
+		{NULL},
 		
 		//Stage background
-		Back_Week2_New,
+		Back_Week1_New,
 		
 		//Song info
 		{FIXED_DEC(1,1),FIXED_DEC(27,10),FIXED_DEC(1,1)},

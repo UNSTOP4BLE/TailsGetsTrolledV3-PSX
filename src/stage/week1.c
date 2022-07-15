@@ -18,7 +18,6 @@ typedef struct
 	
 	//Textures
 	Gfx_Tex tex_back0; //Stage and back
-	Gfx_Tex tex_back1; //Curtains
 } Back_Week1;
 
 static void DrawGrass(Gfx_Tex tex, RECT_FIXED grass_dst)

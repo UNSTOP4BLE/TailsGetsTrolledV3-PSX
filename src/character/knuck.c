@@ -16,10 +16,21 @@ enum
 {
 	knuck_ArcMain_Idle0,
 	knuck_ArcMain_Idle1,
-	knuck_ArcMain_Left,
-	knuck_ArcMain_Down,
-	knuck_ArcMain_Up,
-	knuck_ArcMain_Right,
+	knuck_ArcMain_Idle2,
+	knuck_ArcMain_Idle3,
+	knuck_ArcMain_Idle4,
+	knuck_ArcMain_Idle5,
+	knuck_ArcMain_Left0,
+	knuck_ArcMain_Left1,
+	knuck_ArcMain_Left2,
+	knuck_ArcMain_Left3,
+	knuck_ArcMain_Down0,
+	knuck_ArcMain_Down1,
+	knuck_ArcMain_Up0,
+	knuck_ArcMain_Up1,
+	knuck_ArcMain_Up2,
+	knuck_ArcMain_Right0,
+	knuck_ArcMain_Right1,
 	
 	knuck_Arc_Max,
 };
@@ -39,29 +50,34 @@ typedef struct
 
 //knuck character definitions
 static const CharFrame char_knuck_frame[] = {
-	{knuck_ArcMain_Idle0, {  0,   0, 118, 151}, { 44, 151}}, //0 idle 1
-	{knuck_ArcMain_Idle0, {118,   0, 116, 151}, { 42, 149}}, //1 idle 2
-	{knuck_ArcMain_Idle1, {  0,   0, 112, 160}, { 40, 152}}, //2 idle 3
-	{knuck_ArcMain_Idle1, {112,   0, 108, 160}, { 38, 160}}, //3 idle 4
+	{knuck_ArcMain_Idle0, {  0,   0, 152, 143}, {  0,   0}},
+	{knuck_ArcMain_Idle1, {  0,   0, 152, 139}, {  0,   0}},
+	{knuck_ArcMain_Idle2, {  0,   0, 152, 140}, {  0,   0}},
+	{knuck_ArcMain_Idle3, {  0,   0, 152, 141}, {  0,   0}},
+	{knuck_ArcMain_Idle4, {  0,   0, 154, 143}, {  0,   0}},
+	{knuck_ArcMain_Idle5, {  0,   0, 154, 144}, {  0,   0}},
 	
-	{knuck_ArcMain_Left, {  0,   0, 114, 159}, { 40, 158}}, //4 left 1
-	{knuck_ArcMain_Left, {114,   0, 114, 159}, { 39, 158}}, //5 left 2
+	{knuck_ArcMain_Left0, {  0,   0, 182, 169}, {  0,   0}},
+	{knuck_ArcMain_Left1, {  0,   0, 178, 174}, {  0,   0}},
+	{knuck_ArcMain_Left2, {  0,   0, 170, 188}, {  0,   0}},
+	{knuck_ArcMain_Left3, {  0,   0, 164, 186}, {  0,   0}},
+
+	{knuck_ArcMain_Down0, {  0,   0, 150, 137}, {  0,   0}},
+	{knuck_ArcMain_Down0, {105, 117, 151, 139}, {  0,   0}},
+	{knuck_ArcMain_Down1, {  0,   0, 152, 139}, {  0,   0}}, 
 	
-	{knuck_ArcMain_Down, {  0,   0, 106, 157}, { 36, 156}}, //6 down 1
-	{knuck_ArcMain_Down, {106,   0, 110, 157}, { 39, 157}}, //7 down 2
+	{knuck_ArcMain_Up1, {  0,   0, 105, 164}, { 35, 163}}, //8 up 1
+	{knuck_ArcMain_Up1, {105,   0, 105, 164}, { 34, 162}}, //9 up 2
 	
-	{knuck_ArcMain_Up, {  0,   0, 105, 164}, { 35, 163}}, //8 up 1
-	{knuck_ArcMain_Up, {105,   0, 105, 164}, { 34, 162}}, //9 up 2
-	
-	{knuck_ArcMain_Right, {  0,   0, 117, 152}, { 43, 150}}, //10 right 1
-	{knuck_ArcMain_Right, {117,   0, 117, 152}, { 41, 151}}, //11 right 2
+	{knuck_ArcMain_Right1, {  0,   0, 117, 152}, { 43, 150}}, //10 right 1
+	{knuck_ArcMain_Right1, {117,   0, 117, 152}, { 41, 151}}, //11 right 2
 };
 
 static const Animation char_knuck_anim[CharAnim_Max] = {
-	{2, (const u8[]){ 0,  1,  2,  3, ASCR_BACK, 0}}, //CharAnim_Idle
-	{2, (const u8[]){ 4,  5, ASCR_BACK, 0}},         //CharAnim_Left
+	{2, (const u8[]){ 0, 1, 2, 3, 4, 5, ASCR_BACK, 0}}, //CharAnim_Idle
+	{2, (const u8[]){ 6, 7, 8, 9, ASCR_BACK, 0}},         //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
-	{2, (const u8[]){ 6,  7, ASCR_BACK, 0}},         //CharAnim_Down
+	{2, (const u8[]){ 10, 11, 12, ASCR_BACK, 0}},         //CharAnim_Down
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_DownAlt
 	{2, (const u8[]){ 8,  9, ASCR_BACK, 0}},         //CharAnim_Up
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
@@ -146,10 +162,21 @@ Character *Char_knuck_New(fixed_t x, fixed_t y)
 	const char **pathp = (const char *[]){
 		"idle0.tim", //knuck_ArcMain_Idle0
 		"idle1.tim", //knuck_ArcMain_Idle1
-		"left.tim",  //knuck_ArcMain_Left
-		"down.tim",  //knuck_ArcMain_Down
-		"up.tim",    //knuck_ArcMain_Up
-		"right.tim", //knuck_ArcMain_Right
+		"idle2.tim", //knuck_ArcMain_Idle1
+		"idle3.tim", //knuck_ArcMain_Idle1
+		"idle4.tim", //knuck_ArcMain_Idle1
+		"idle5.tim", //knuck_ArcMain_Idle1
+		"left0.tim",  //knuck_ArcMain_Left
+		"left1.tim",  //knuck_ArcMain_Left
+		"left2.tim",  //knuck_ArcMain_Left
+		"left3.tim",  //knuck_ArcMain_Left
+		"down0.tim",  //knuck_ArcMain_Down
+		"down1.tim",  //knuck_ArcMain_Down
+		"up0.tim",    //knuck_ArcMain_Up
+		"up1.tim",    //knuck_ArcMain_Up
+		"up2.tim",    //knuck_ArcMain_Up
+		"right0.tim", //knuck_ArcMain_Right
+		"right1.tim", //knuck_ArcMain_Right
 		NULL
 	};
 	IO_Data *arc_ptr = this->arc_ptr;
