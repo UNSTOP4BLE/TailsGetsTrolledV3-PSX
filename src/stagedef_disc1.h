@@ -1,12 +1,12 @@
 	{ //StageId_1_1 (Talentless Fox)
 		//Characters
 		{Char_BF_New,    FIXED_DEC(60,1),  FIXED_DEC(100,1)},
-		{Char_tails_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
+		{Char_tails_New, FIXED_DEC(-100,1),  FIXED_DEC(100,1)},
         {NULL},
 		{Char_GF_New,     FIXED_DEC(0,1),  FIXED_DEC(-10,1)},
 		
 		//Stage background
-		Back_Week1_New,
+		Back_Chapter1_New,
 		
 		//Song info
 		{FIXED_DEC(1,1),FIXED_DEC(29,10),FIXED_DEC(1,1)},
@@ -18,12 +18,12 @@
 	{ //StageId_1_2 (No Villains)
 		//Characters
 		{Char_BF_New,    FIXED_DEC(60,1),  FIXED_DEC(100,1)},
-		{Char_Sonic_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
+		{Char_Sonic_New, FIXED_DEC(-80,1),  FIXED_DEC(100,1)},
         {NULL},
 		{Char_GF_New,     FIXED_DEC(0,1),  FIXED_DEC(-10,1)},
 		
 		//Stage background
-		Back_Week1_New,
+		Back_Chapter2_New,
 		
 		//Song info
 		{FIXED_DEC(1,1),FIXED_DEC(31,10),FIXED_DEC(1,1)},
@@ -40,7 +40,7 @@
 		{Char_GF_New,     FIXED_DEC(0,1),  FIXED_DEC(-10,1)},
 		
 		//Stage background
-		Back_Week1_New,
+		Back_Chapter1_New,
 		
 		//Song info
 		{FIXED_DEC(1,1),FIXED_DEC(3,1),FIXED_DEC(1,1)},
@@ -75,7 +75,7 @@
 		{Char_GF_New,       FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
 		
 		//Stage background
-		Back_Week2_New,
+		Back_Chapter2_New,
 		
 		//Song info
 		{FIXED_DEC(1,1),FIXED_DEC(35,10),FIXED_DEC(1,1)},
@@ -92,7 +92,7 @@
 		{Char_GF_New,       FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
 		
 		//Stage background
-		Back_Week2_New,
+		Back_Chapter2_New,
 		
 		//Song info
 		{FIXED_DEC(1,1),FIXED_DEC(29,10),FIXED_DEC(1,1)},

@@ -34,6 +34,7 @@ build/
 
 # Exclude converted assets
 iso/*/*.tim
+iso/*/*/*.tim
 iso/*/*.arc
 iso/*/*.xa
 iso/*/*.cht

@@ -4,12 +4,12 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#ifndef PSXF_GUARD_WEEK1_H
-#define PSXF_GUARD_WEEK1_H
+#ifndef PSXF_GUARD_CHAPTER2_H
+#define PSXF_GUARD_CHAPTER2_H
 
 #include "../stage.h"
 
-//Week 1 functions
-StageBack *Back_Week1_New();
+//Chapter 2 functions
+StageBack *Back_Chapter2_New();
 
 #endif

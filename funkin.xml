@@ -47,20 +47,20 @@
 				<file name = "hud0weeb.tim" type = "data" source = "iso/stage/hud0weeb.tim"/>
 			</dir>
 			
-			<!-- Week 1 assets -->
-			<dir name = "week1">
+			<!-- Chapter 1 assets -->
+			<dir name = "ch1">
 				<!-- Background art -->
-				<file name = "back.arc" type = "data" source = "iso/week1/back.arc"/>
+				<file name = "back.arc" type = "data" source = "iso/chapter1/back.arc"/>
 				
 				<file name = "1.1n.cht" type = "data" source = "iso/chart/talentless-fox.json.cht"/>
 				<file name = "1.2n.cht" type = "data" source = "iso/chart/no-villains.json.cht"/>
 				<file name = "1.3n.cht" type = "data" source = "iso/chart/die-batsards.json.cht"/>
 			</dir>
 			
-			<!-- Week 2 assets -->
-			<dir name = "week2">
+			<!-- Chapter 2 assets -->
+			<dir name = "ch2">
 				<!-- Background art -->
-				<file name = "back.arc" type = "data" source = "iso/week2/back.arc"/>
+				<file name = "back.arc" type = "data" source = "iso/chapter2/back.arc"/>
 				
 				<file name = "2.1n.cht" type = "data" source = "iso/chart/high-shovel.json.cht"/>
 				<file name = "2.2n.cht" type = "data" source = "iso/chart/taste-for-blood.json.cht"/>
@@ -78,7 +78,7 @@
 			</dir>
 			
 			<!-- Week 4 assets -->
-			<dir name = "week4">
+			<dir name = "ch4">
 				<!-- Background art -->
 				<file name = "back.arc" type = "data" source = "iso/week4/back.arc"/>
 				

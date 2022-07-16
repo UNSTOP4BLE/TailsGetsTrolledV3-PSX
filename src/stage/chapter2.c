@@ -4,52 +4,101 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#include "week1.h"
+#include "chapter2.h"
 
-#include "../archive.h"
 #include "../mem.h"
-#include "../stage.h"
+#include "../archive.h"
 
-//Week 1 background structure
+//Chapter 2 background structure
 typedef struct
 {
 	//Stage background base structure
 	StageBack back;
 	
 	//Textures
-	Gfx_Tex tex_back0; //Stage and back
-} Back_Week1;
+	Gfx_Tex tex_back0; //Background
+	Gfx_Tex tex_back1; //Window
+	Gfx_Tex tex_back2; //Lightning window
+} Back_Chapter2;
 
 static void DrawGrass(Gfx_Tex tex, RECT_FIXED grass_dst)
 {
 	RECT grass_src = {136, 0, 119, 11};
 	Stage_DrawTex(&tex, &grass_src, &grass_dst, stage.camera.bzoom);
+
 	grass_src.y += 11;
 	grass_dst.x += grass_dst.w;
 	Stage_DrawTex(&tex, &grass_src, &grass_dst, stage.camera.bzoom);
+
 	grass_src.y += 11;
 	grass_dst.x += grass_dst.w;
 	Stage_DrawTex(&tex, &grass_src, &grass_dst, stage.camera.bzoom);
 
 	RECT green_fill = {152, 6, 1, 1};
-	RECT_FIXED green_dst = {FIXED_DEC(-screen.SCREEN_WIDTH / 2,1), grass_dst.y + FIXED_DEC(11,1), FIXED_DEC(screen.SCREEN_WIDTH,1), FIXED_DEC(120,1)};
+	RECT_FIXED green_dst = {
+	FIXED_DEC(-screen.SCREEN_WIDTH / 2,1), 
+	grass_dst.y + FIXED_DEC(11,1), 
+	FIXED_DEC(screen.SCREEN_WIDTH,1), 
+	FIXED_DEC(120,1)
+};
 	Stage_DrawTex(&tex, &green_fill, &green_dst, stage.camera.bzoom);
 }
 
-//Week 1 background functions
-void Back_Week1_DrawBG(StageBack *back)
+//Chapter 2 background functions
+void Back_Chapter2_DrawBG(StageBack *back)
 {
-	Back_Week1 *this = (Back_Week1*)back;
+	Back_Chapter2 *this = (Back_Chapter2*)back;
 	
 	fixed_t fx, fy;
+
+	//draw plant
+	fx = stage.camera.x;
+	fy = stage.camera.y;
+
+	RECT plant_src = {150, 49, 68, 50};
+	RECT plant2_src = {177, 124, 17, 36};
+
+	RECT_FIXED plant_dst = {
+	FIXED_DEC(-196,1) - fx, 
+	FIXED_DEC(88,1) - fy, 
+	FIXED_DEC(68 * 2,1),
+	 FIXED_DEC(50 *2,1)
+};
+
+	if (stage.widescreen)
+	plant_dst.x -= FIXED_DEC(100,1);
+
+	Stage_DrawTex(&this->tex_back0, &plant_src, &plant_dst, stage.camera.bzoom);
+
+	RECT_FIXED plant2_dst = {
+	plant_dst.x + FIXED_DEC(280,1), 
+	plant_dst.y, 
+	FIXED_DEC(17 *2,1),
+	 FIXED_DEC(36 * 2,1)
+};
+	if (stage.widescreen)
+	plant2_dst.x += FIXED_DEC(172,1);
+
+	Stage_DrawTex(&this->tex_back0, &plant2_src, &plant2_dst, stage.camera.bzoom);
 
 	//Draw bg
 	fx = stage.camera.x * 13 / 10;
 	fy = stage.camera.y * 13 / 10;
 
-	RECT_FIXED grass_dst = {FIXED_DEC(-229,1) - stage.camera.x, FIXED_DEC(44,1) - stage.camera.y, FIXED_DEC(205,1), FIXED_DEC(11,1)}; 
+	RECT_FIXED grass_dst = {
+	FIXED_DEC(-229,1) - stage.camera.x, 
+	FIXED_DEC(44,1) - stage.camera.y, 
+	FIXED_DEC(205,1), 
+	FIXED_DEC(11,1)
+}; 
+
 	RECT tree_src = {0, 0, 74, 256};
-	RECT_FIXED tree_dst = {FIXED_DEC(-266,1) - fx, FIXED_DEC(-144,1) - fy, FIXED_DEC(tree_src.w,1), FIXED_DEC(tree_src.h,1)}; 
+	RECT_FIXED tree_dst = {
+	FIXED_DEC(-266,1) - fx, 
+	FIXED_DEC(-144,1) - fy, 
+	FIXED_DEC(tree_src.w,1), 
+	FIXED_DEC(tree_src.h,1)
+}; 
 	
 	Debug_StageMoveDebug(&grass_dst, 4, stage.camera.x, stage.camera.y);
 	if (stage.widescreen)
@@ -70,33 +119,33 @@ void Back_Week1_DrawBG(StageBack *back)
 	DrawGrass(this->tex_back0, grass_dst);
 }
 
-void Back_Week1_Free(StageBack *back)
+void Back_Chapter2_Free(StageBack *back)
 {
-	Back_Week1 *this = (Back_Week1*)back;
+	Back_Chapter2 *this = (Back_Chapter2*)back;
 	
 	//Free structure
 	Mem_Free(this);
 }
 
-StageBack *Back_Week1_New(void)
+StageBack *Back_Chapter2_New(void)
 {
 	//Allocate background structure
-	Back_Week1 *this = (Back_Week1*)Mem_Alloc(sizeof(Back_Week1));
+	Back_Chapter2 *this = (Back_Chapter2*)Mem_Alloc(sizeof(Back_Chapter2));
 	if (this == NULL)
 		return NULL;
 	
 	//Set background functions
 	this->back.draw_fg = NULL;
 	this->back.draw_md = NULL;
-	this->back.draw_bg = Back_Week1_DrawBG;
-	this->back.free = Back_Week1_Free;
+	this->back.draw_bg = Back_Chapter2_DrawBG;
+	this->back.free = Back_Chapter2_Free;
 	
 	//Load background textures
-	IO_Data arc_back = IO_Read("\\WEEK1\\BACK.ARC;1");
+	IO_Data arc_back = IO_Read("\\CH2\\BACK.ARC;1");
 	Gfx_LoadTex(&this->tex_back0, Archive_Find(arc_back, "back0.tim"), 0);
 	Mem_Free(arc_back);
-	
-	Gfx_SetClear(154, 217, 234);
 
+	Gfx_SetClear(154, 217, 234);
+	
 	return (StageBack*)this;
 }

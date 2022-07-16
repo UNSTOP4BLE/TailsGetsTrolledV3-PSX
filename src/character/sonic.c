@@ -59,26 +59,44 @@ typedef struct
 
 //Sonic character definitions
 static const CharFrame char_sonic_frame[] = {
-	{Sonic_ArcMain_Normal0, {  2,   2, 106, 148}, { 91, 147}}, //0 idle 1
-	{Sonic_ArcMain_Normal0, {110,   2, 105, 148}, { 89, 148}}, //1 idle 2
-	{Sonic_ArcMain_Normal1, {  2,   2, 104, 153}, { 91, 151}}, //2 idle 3
-	{Sonic_ArcMain_Normal1, {109,   2, 108, 156}, { 92, 154}}, //3 idle 4
-	{Sonic_ArcMain_Normal2, {  1,   2, 107, 155}, { 93, 155}}, //4 idle 5
+	{Sonic_ArcMain_Normal0, {  2,   2, 106, 148}, { 58, 145}}, //0 idle 1
+	{Sonic_ArcMain_Normal0, {110,   2, 105, 148}, { 57, 145}}, //1 idle 2
+	{Sonic_ArcMain_Normal1, {  2,   2, 104, 153}, { 58, 149}}, //2 idle 3
+	{Sonic_ArcMain_Normal1, {109,   2, 108, 156}, { 60, 153}}, //3 idle 4
+	{Sonic_ArcMain_Normal2, {  1,   2, 107, 155}, { 60, 152}}, //4 idle 5
 	
-	{Sonic_ArcMain_Normal2, {112,   2, 106, 157}, { 91, 157}}, //5 left 1
-	{Sonic_ArcMain_Normal3, {  3,   1, 107, 158}, { 91, 157}}, //6 left 2
+	{Sonic_ArcMain_Normal2, {112,   2, 106, 157}, { 58, 154}}, //5 left 1
+	{Sonic_ArcMain_Normal3, {  3,   1, 107, 158}, { 58, 154}}, //6 left 2
 	
-	{Sonic_ArcMain_Normal3, {119,  12,  93, 147}, { 84, 147}}, //7 down 1
-	{Sonic_ArcMain_Normal4, {  2,  10,  91, 149}, { 86, 149}}, //8 down 2
+	{Sonic_ArcMain_Normal3, {119,  12,  93, 147}, { 51, 144}}, //7 down 1
+	{Sonic_ArcMain_Normal4, {  2,  10,  91, 149}, { 53, 146}}, //8 down 2
 	
-	{Sonic_ArcMain_Normal4, { 97,   1,  94, 163}, { 51, 117}}, //9 up 1
-	{Sonic_ArcMain_Normal5, {  4,   3,  96, 159}, { 53, 116}}, //10 up 2
+	{Sonic_ArcMain_Normal4, { 97,   1,  94, 163}, { 48, 160}}, //9 up 1
+	{Sonic_ArcMain_Normal5, {  4,   3,  96, 159}, { 49, 156}}, //10 up 2
 	
-	{Sonic_ArcMain_Normal5, {102,   6,  87, 155}, { 41, 105}}, //11 right 1
-	{Sonic_ArcMain_Normal6, {  3,   3,  83, 155}, { 40, 106}}, //12 right 2
+	{Sonic_ArcMain_Normal5, {102,   6,  87, 155}, { 43, 152}}, //11 right 1
+	{Sonic_ArcMain_Normal6, {  3,   3,  83, 155}, { 43, 152}}, //12 right 2
+
+	{Sonic_ArcMain_Mad0, {  1,   1,  93, 149}, { 59, 146}}, //13 idle 1
+	{Sonic_ArcMain_Mad0, {108,   2,  92, 148}, { 59, 145}}, //14 idle 2
+	{Sonic_ArcMain_Mad1, {  3,   2,  90, 152}, { 57, 149}}, //15 idle 3
+	{Sonic_ArcMain_Mad1, {113,   4,  89, 155}, { 56, 151}}, //16 idle 4
+	{Sonic_ArcMain_Mad2, {  6,   2,  89, 155}, { 55, 152}}, //17 idle 5
+	
+	{Sonic_ArcMain_Mad2, {110,   5, 100, 155}, { 60, 152}}, //18 left 1
+	{Sonic_ArcMain_Mad3, {  3,   3, 102, 155}, { 58, 152}}, //19 left 2
+	
+	{Sonic_ArcMain_Mad3, {115,   9,  89, 150}, { 55, 147}}, //20 down 1
+	{Sonic_ArcMain_Mad4, {  0,   7,  89, 152}, { 55, 149}}, //21 down 2
+	
+	{Sonic_ArcMain_Mad4, { 94,   7,  99, 157}, { 51, 154}}, //22 up 1
+	{Sonic_ArcMain_Mad5, {  5,   3, 100, 156}, { 50, 154}}, //23 up 2
+	
+	{Sonic_ArcMain_Mad5, {111,   4, 107, 155}, { 45, 152}}, //24 right 1
+	{Sonic_ArcMain_Mad6, {  5,   3, 108, 155}, { 48, 152}}, //25 right 2
 };
 
-static const Animation char_sonic_anim[CharAnim_Max] = {
+static const Animation char_normal_anim[CharAnim_Max] = {
 	{2, (const u8[]){ 0,  1,  2,  3,  4, ASCR_BACK, 0}}, //CharAnim_Idle
 	{2, (const u8[]){ 5,  6, ASCR_BACK, 0}},         //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
@@ -87,6 +105,18 @@ static const Animation char_sonic_anim[CharAnim_Max] = {
 	{2, (const u8[]){ 9, 10, ASCR_BACK, 0}},         //CharAnim_Up
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
 	{2, (const u8[]){11, 12, ASCR_BACK, 0}},         //CharAnim_Right
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_RightAlt
+};
+
+static const Animation char_mad_anim[CharAnim_Max] = {
+	{2, (const u8[]){13, 14, 15, 16, 17, ASCR_BACK, 0}}, //CharAnim_Idle
+	{2, (const u8[]){18, 19, ASCR_BACK, 0}},         //CharAnim_Left
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
+	{2, (const u8[]){20, 21, ASCR_BACK, 0}},         //CharAnim_Down
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_DownAlt
+	{2, (const u8[]){22, 23, ASCR_BACK, 0}},         //CharAnim_Up
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
+	{2, (const u8[]){24, 25, ASCR_BACK, 0}},         //CharAnim_Right
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_RightAlt
 };
 
@@ -149,7 +179,7 @@ Character *Char_Sonic_New(fixed_t x, fixed_t y)
 	this->character.set_anim = Char_Sonic_SetAnim;
 	this->character.free = Char_Sonic_Free;
 	
-	Animatable_Init(&this->character.animatable, char_sonic_anim);
+	Animatable_Init(&this->character.animatable, char_normal_anim);
 	Character_Init((Character*)this, x, y);
 	
 	//Set character information
@@ -157,8 +187,8 @@ Character *Char_Sonic_New(fixed_t x, fixed_t y)
 	
 	this->character.health_i = 1;
 	
-	this->character.focus_x = FIXED_DEC(65,1);
-	this->character.focus_y = FIXED_DEC(-65,1);
+	this->character.focus_x = FIXED_DEC(25,1);
+	this->character.focus_y = FIXED_DEC(-115,1);
 	this->character.focus_zoom = FIXED_DEC(1,1);
 	
 	//Load art

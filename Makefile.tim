@@ -35,8 +35,8 @@ all: \
 	iso/gf/weeb.arc \
 	iso/gf/speaker.tim \
 	iso/gf/speakerx.tim \
-	iso/week1/back.arc \
-	iso/week2/back.arc \
+	iso/chapter1/back.arc \
+	iso/chapter2/back.arc \
 	iso/week3/back.arc \
 	iso/week4/back.arc \
 	iso/week4/hench.arc \
@@ -97,11 +97,11 @@ iso/gf/xmas.arc: iso/gf/xmasgf0.tim iso/gf/xmasgf1.tim iso/gf/xmasgf2.tim
 iso/gf/tut.arc: iso/gf/tut0.tim iso/gf/tut1.tim
 iso/gf/weeb.arc: iso/gf/weeb0.tim iso/gf/weeb1.tim
 
-# Week 1
-iso/week1/back.arc: iso/week1/back0.tim 
+# Chapter 1
+iso/chapter1/back.arc: iso/chapter1/back0.tim 
 
-# Week 2
-iso/week2/back.arc: iso/week2/back0.tim 
+# Chapter 2
+iso/chapter2/back.arc: iso/chapter2/back0.tim 
 
 # Week 3
 iso/week3/back.arc: iso/week3/back0.tim iso/week3/back1.tim iso/week3/back2.tim iso/week3/back3.tim iso/week3/back4.tim 

@@ -62,8 +62,8 @@ int drawshit;
 #include "character/gfweeb.h"
 
 #include "stage/dummy.h"
-#include "stage/week1.h"
-#include "stage/week2.h"
+#include "stage/chapter1.h"
+#include "stage/chapter2.h"
 #include "stage/week3.h"
 #include "stage/week4.h"
 #include "stage/week5.h"
@@ -1197,7 +1197,7 @@ static void Stage_LoadChart(void)
 	char chart_path[64];
 	
 	//Use standard path convention
-	sprintf(chart_path, "\\WEEK%d\\%d.%d%c.CHT;1", stage.stage_def->week, stage.stage_def->week, stage.stage_def->week_song, "ENH"[stage.stage_diff]);
+	sprintf(chart_path, "\\CH%d\\%d.%d%c.CHT;1", stage.stage_def->week, stage.stage_def->week, stage.stage_def->week_song, "ENH"[stage.stage_diff]);
 	
 	
 	if (stage.chart_data != NULL)
