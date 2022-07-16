@@ -97,7 +97,10 @@
 
 				<!-- Sonic assets -->
 				<file name = "sonic.arc" type = "data" source = "iso/sonic/main.arc"/>
-				
+
+				<!-- shadow assets -->
+				<file name = "shadowhs.arc" type = "data" source = "iso/shadow/hs/main.arc"/>
+
 				<!-- Knuckles assets -->
 				<file name = "knuck.arc" type = "data" source = "iso/knuck/main.arc"/>
 

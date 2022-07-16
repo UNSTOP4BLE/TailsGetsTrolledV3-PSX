@@ -51,6 +51,7 @@ int drawshit;
 #include "character/bfweeb.h"
 #include "character/tails.h"
 #include "character/sonic.h"
+#include "character/shadowhs.h"
 #include "character/knuck.h"
 #include "character/mom.h"
 #include "character/xmasp.h"

@@ -4,7 +4,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#include "bf.h"
+#include "shadowhs.h"
 
 #include "../mem.h"
 #include "../archive.h"
@@ -13,7 +13,7 @@
 #include "../main.h"
 
 //Boyfriend skull fragments
-static SkullFragment char_bf_skull[15] = {
+static SkullFragment char_shadowhs_skull[15] = {
 	{ 1 * 8, -87 * 8, -13, -13},
 	{ 9 * 8, -88 * 8,   5, -22},
 	{18 * 8, -87 * 8,   9, -22},
@@ -36,29 +36,44 @@ static SkullFragment char_bf_skull[15] = {
 
 //Boyfriend player types
 enum
-{
-	BF_ArcMain_BF0,
-	BF_ArcMain_BF1,
-	BF_ArcMain_BF2,
-	BF_ArcMain_BF3,
-	BF_ArcMain_BF4,
-	BF_ArcMain_BF5,
-	BF_ArcMain_BF6,
-	BF_ArcMain_Dead0, //BREAK
+{	
+	shadowhs_ArcMain_Idle0,
+	shadowhs_ArcMain_Idle1,
+	shadowhs_ArcMain_Idle2,
+	shadowhs_ArcMain_Idle3,
+	shadowhs_ArcMain_Idle4,
+	shadowhs_ArcMain_Idle5,
+	shadowhs_ArcMain_Idle6,
+	shadowhs_ArcMain_Left0,
+	shadowhs_ArcMain_Left1,
+	shadowhs_ArcMain_Left2,
+	shadowhs_ArcMain_Down0,
+	shadowhs_ArcMain_Down1,
+	shadowhs_ArcMain_Down2,
+	shadowhs_ArcMain_Up0,
+	shadowhs_ArcMain_Up1,
+	shadowhs_ArcMain_Up2,
+	shadowhs_ArcMain_Right0,
+	shadowhs_ArcMain_Right1,
+	shadowhs_ArcMain_Right2,
+	shadowhs_ArcMain_Cough0,
+	shadowhs_ArcMain_Cough1,
+	shadowhs_ArcMain_Cough2,
+	shadowhs_ArcMain_Dead0, //BREAK
 	
-	BF_ArcMain_Max,
+	shadowhs_ArcMain_Max,
 };
 
 enum
 {
-	BF_ArcDead_Dead1, //Mic Drop
-	BF_ArcDead_Dead2, //Twitch
-	BF_ArcDead_Retry, //Retry prompt
+	shadowhs_ArcDead_Dead1, //Mic Drop
+	shadowhs_ArcDead_Dead2, //Twitch
+	shadowhs_ArcDead_Retry, //Retry prompt
 	
-	BF_ArcDead_Max,
+	shadowhs_ArcDead_Max,
 };
 
-#define BF_Arc_Max BF_ArcMain_Max
+#define shadowhs_Arc_Max shadowhs_ArcMain_Max
 
 typedef struct
 {
@@ -68,75 +83,66 @@ typedef struct
 	//Render data and state
 	IO_Data arc_main, arc_dead;
 	CdlFILE file_dead_arc; //dead.arc file position
-	IO_Data arc_ptr[BF_Arc_Max];
+	IO_Data arc_ptr[shadowhs_Arc_Max];
 	
 	Gfx_Tex tex, tex_retry;
 	u8 frame, tex_id;
 	
 	u8 retry_bump;
 	
-	SkullFragment skull[COUNT_OF(char_bf_skull)];
+	SkullFragment skull[COUNT_OF(char_shadowhs_skull)];
 	u8 skull_scale;
-} Char_BF;
+} Char_shadowhs;
 
 //Boyfriend player definitions
-static const CharFrame char_bf_frame[] = {
-	{BF_ArcMain_BF0, {  0,   0, 102,  99}, { 53,  92}}, //0 idle 1
-	{BF_ArcMain_BF0, {103,   0, 102,  99}, { 53,  92}}, //1 idle 2
-	{BF_ArcMain_BF0, {  0, 100, 102, 101}, { 53,  94}}, //2 idle 3
-	{BF_ArcMain_BF0, {103, 100, 103, 104}, { 53,  97}}, //3 idle 4
-	{BF_ArcMain_BF1, {  0,   0, 103, 104}, { 53,  97}}, //4 idle 5
+static const CharFrame char_shadowhs_frame[] = {
+	{shadowhs_ArcMain_Idle0, {  0,   0, 102,  99}, { 53,  92}}, //0 idle 1
+	{shadowhs_ArcMain_Idle0, {103,   0, 102,  99}, { 53,  92}}, //1 idle 2
+	{shadowhs_ArcMain_Idle0, {  0, 100, 102, 101}, { 53,  94}}, //2 idle 3
+	{shadowhs_ArcMain_Idle0, {103, 100, 103, 104}, { 53,  97}}, //3 idle 4
+	{shadowhs_ArcMain_Idle0, {  0,   0, 103, 104}, { 53,  97}}, //4 idle 5
 	
-	{BF_ArcMain_BF1, {104,   0,  96, 102}, { 56,  95}}, //5 left 1
-	{BF_ArcMain_BF1, {  0, 105,  94, 102}, { 54,  95}}, //6 left 2
+	{shadowhs_ArcMain_Idle0, {104,   0,  96, 102}, { 56,  95}}, //5 left 1
+	{shadowhs_ArcMain_Idle0, {  0, 105,  94, 102}, { 54,  95}}, //6 left 2
 	
-	{BF_ArcMain_BF1, { 95, 103,  94,  89}, { 52,  82}}, //7 down 1
-	{BF_ArcMain_BF2, {  0,   0,  94,  90}, { 52,  83}}, //8 down 2
+	{shadowhs_ArcMain_Idle0, { 95, 103,  94,  89}, { 52,  82}}, //7 down 1
+	{shadowhs_ArcMain_Idle0, {  0,   0,  94,  90}, { 52,  83}}, //8 down 2
 	
-	{BF_ArcMain_BF2, { 95,   0,  93, 112}, { 41, 104}}, //9 up 1
-	{BF_ArcMain_BF2, {  0,  91,  94, 111}, { 42, 103}}, //10 up 2
+	{shadowhs_ArcMain_Idle0, { 95,   0,  93, 112}, { 41, 104}}, //9 up 1
+	{shadowhs_ArcMain_Idle0, {  0,  91,  94, 111}, { 42, 103}}, //10 up 2
 	
-	{BF_ArcMain_BF2, { 95, 113, 102, 102}, { 41,  95}}, //11 right 1
-	{BF_ArcMain_BF3, {  0,   0, 102, 102}, { 41,  95}}, //12 right 2
+	{shadowhs_ArcMain_Idle0, { 95, 113, 102, 102}, { 41,  95}}, //11 right 1
+	{shadowhs_ArcMain_Idle0, {  0,   0, 102, 102}, { 41,  95}}, //12 right 2
 	
-	{BF_ArcMain_BF3, {103,   0,  99, 105}, { 54,  98}}, //13 peace 1
-	{BF_ArcMain_BF3, {  0, 103, 104, 103}, { 54,  96}}, //14 peace 2
-	{BF_ArcMain_BF3, {105, 106, 104, 104}, { 54,  97}}, //15 peace 3
+	{shadowhs_ArcMain_Idle0, {  0,   0,  93, 108}, { 52, 101}}, //20 left miss 1
+	{shadowhs_ArcMain_Idle0, { 94,   0,  93, 108}, { 52, 101}}, //21 left miss 2
 	
-	{BF_ArcMain_BF4, {  0,   0, 128, 128}, { 53,  92}}, //16 sweat 1
-	{BF_ArcMain_BF4, {128,   0, 128, 128}, { 53,  93}}, //17 sweat 2
-	{BF_ArcMain_BF4, {  0, 128, 128, 128}, { 53,  98}}, //18 sweat 3
-	{BF_ArcMain_BF4, {128, 128, 128, 128}, { 53,  98}}, //19 sweat 4
+	{shadowhs_ArcMain_Idle0, {  0, 109,  95,  98}, { 50,  90}}, //22 down miss 1
+	{shadowhs_ArcMain_Idle0, { 96, 109,  95,  97}, { 50,  89}}, //23 down miss 2
 	
-	{BF_ArcMain_BF5, {  0,   0,  93, 108}, { 52, 101}}, //20 left miss 1
-	{BF_ArcMain_BF5, { 94,   0,  93, 108}, { 52, 101}}, //21 left miss 2
+	{shadowhs_ArcMain_Idle0, {  0,   0,  90, 107}, { 44,  99}}, //24 up miss 1
+	{shadowhs_ArcMain_Idle0, { 91,   0,  89, 108}, { 44, 100}}, //25 up miss 2
 	
-	{BF_ArcMain_BF5, {  0, 109,  95,  98}, { 50,  90}}, //22 down miss 1
-	{BF_ArcMain_BF5, { 96, 109,  95,  97}, { 50,  89}}, //23 down miss 2
-	
-	{BF_ArcMain_BF6, {  0,   0,  90, 107}, { 44,  99}}, //24 up miss 1
-	{BF_ArcMain_BF6, { 91,   0,  89, 108}, { 44, 100}}, //25 up miss 2
-	
-	{BF_ArcMain_BF6, {  0, 108,  99, 108}, { 42, 101}}, //26 right miss 1
-	{BF_ArcMain_BF6, {100, 109, 101, 108}, { 43, 101}}, //27 right miss 2
+	{shadowhs_ArcMain_Idle0, {  0, 108,  99, 108}, { 42, 101}}, //26 right miss 1
+	{shadowhs_ArcMain_Idle0, {100, 109, 101, 108}, { 43, 101}}, //27 right miss 2
 
-	{BF_ArcMain_Dead0, {  0,   0, 128, 128}, { 53,  98}}, //23 dead0 0
-	{BF_ArcMain_Dead0, {128,   0, 128, 128}, { 53,  98}}, //24 dead0 1
-	{BF_ArcMain_Dead0, {  0, 128, 128, 128}, { 53,  98}}, //25 dead0 2
-	{BF_ArcMain_Dead0, {128, 128, 128, 128}, { 53,  98}}, //26 dead0 3
+	{shadowhs_ArcMain_Dead0, {  0,   0, 128, 128}, { 53,  98}}, //23 dead0 0
+	{shadowhs_ArcMain_Dead0, {128,   0, 128, 128}, { 53,  98}}, //24 dead0 1
+	{shadowhs_ArcMain_Dead0, {  0, 128, 128, 128}, { 53,  98}}, //25 dead0 2
+	{shadowhs_ArcMain_Dead0, {128, 128, 128, 128}, { 53,  98}}, //26 dead0 3
 	
-	{BF_ArcDead_Dead1, {  0,   0, 128, 128}, { 53,  98}}, //27 dead1 0
-	{BF_ArcDead_Dead1, {128,   0, 128, 128}, { 53,  98}}, //28 dead1 1
-	{BF_ArcDead_Dead1, {  0, 128, 128, 128}, { 53,  98}}, //29 dead1 2
-	{BF_ArcDead_Dead1, {128, 128, 128, 128}, { 53,  98}}, //30 dead1 3
+	{shadowhs_ArcDead_Dead1, {  0,   0, 128, 128}, { 53,  98}}, //27 dead1 0
+	{shadowhs_ArcDead_Dead1, {128,   0, 128, 128}, { 53,  98}}, //28 dead1 1
+	{shadowhs_ArcDead_Dead1, {  0, 128, 128, 128}, { 53,  98}}, //29 dead1 2
+	{shadowhs_ArcDead_Dead1, {128, 128, 128, 128}, { 53,  98}}, //30 dead1 3
 	
-	{BF_ArcDead_Dead2, {  0,   0, 128, 128}, { 53,  98}}, //31 dead2 body twitch 0
-	{BF_ArcDead_Dead2, {128,   0, 128, 128}, { 53,  98}}, //32 dead2 body twitch 1
-	{BF_ArcDead_Dead2, {  0, 128, 128, 128}, { 53,  98}}, //33 dead2 balls twitch 0
-	{BF_ArcDead_Dead2, {128, 128, 128, 128}, { 53,  98}}, //34 dead2 balls twitch 1
+	{shadowhs_ArcDead_Dead2, {  0,   0, 128, 128}, { 53,  98}}, //31 dead2 body twitch 0
+	{shadowhs_ArcDead_Dead2, {128,   0, 128, 128}, { 53,  98}}, //32 dead2 body twitch 1
+	{shadowhs_ArcDead_Dead2, {  0, 128, 128, 128}, { 53,  98}}, //33 dead2 balls twitch 0
+	{shadowhs_ArcDead_Dead2, {128, 128, 128, 128}, { 53,  98}}, //34 dead2 balls twitch 1
 };
 
-static const Animation char_bf_anim[PlayerAnim_Max] = {
+static const Animation char_shadowhs_anim[PlayerAnim_Max] = {
 	{2, (const u8[]){ 0,  1,  2,  3,  4, ASCR_BACK, 1}}, //CharAnim_Idle
 	{2, (const u8[]){ 5,  6, ASCR_BACK, 1}},             //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_LeftAlt
@@ -167,23 +173,23 @@ static const Animation char_bf_anim[PlayerAnim_Max] = {
 };
 
 //Boyfriend player functions
-void Char_BF_SetFrame(void *user, u8 frame)
+void Char_shadowhs_SetFrame(void *user, u8 frame)
 {
-	Char_BF *this = (Char_BF*)user;
+	Char_shadowhs *this = (Char_shadowhs*)user;
 	
 	//Check if this is a new frame
 	if (frame != this->frame)
 	{
 		//Check if new art shall be loaded
-		const CharFrame *cframe = &char_bf_frame[this->frame = frame];
+		const CharFrame *cframe = &char_shadowhs_frame[this->frame = frame];
 		if (cframe->tex != this->tex_id)
 			Gfx_LoadTex(&this->tex, this->arc_ptr[this->tex_id = cframe->tex], 0);
 	}
 }
 
-void Char_BF_Tick(Character *character)
+void Char_shadowhs_Tick(Character *character)
 {
-	Char_BF *this = (Char_BF*)character;
+	Char_shadowhs *this = (Char_shadowhs*)character;
 	
 	//Handle animation updates
 	if ((character->pad_held & (INPUT_LEFT | INPUT_DOWN | INPUT_UP | INPUT_RIGHT)) == 0 ||
@@ -238,7 +244,7 @@ void Char_BF_Tick(Character *character)
 		if (this->skull_scale)
 		{
 			SkullFragment *frag = this->skull;
-			for (size_t i = 0; i < COUNT_OF_MEMBER(Char_BF, skull); i++, frag++)
+			for (size_t i = 0; i < COUNT_OF_MEMBER(Char_shadowhs, skull); i++, frag++)
 			{
 				//Draw fragment
 				RECT frag_src = {
@@ -332,13 +338,13 @@ void Char_BF_Tick(Character *character)
 	}
 	
 	//Animate and draw character
-	Animatable_Animate(&character->animatable, (void*)this, Char_BF_SetFrame);
-	Character_Draw(character, &this->tex, &char_bf_frame[this->frame]);
+	Animatable_Animate(&character->animatable, (void*)this, Char_shadowhs_SetFrame);
+	Character_Draw(character, &this->tex, &char_shadowhs_frame[this->frame]);
 }
 
-void Char_BF_SetAnim(Character *character, u8 anim)
+void Char_shadowhs_SetAnim(Character *character, u8 anim)
 {
-	Char_BF *this = (Char_BF*)character;
+	Char_shadowhs *this = (Char_shadowhs*)character;
 	
 	//Perform animation checks
 	switch (anim)
@@ -358,9 +364,9 @@ void Char_BF_SetAnim(Character *character, u8 anim)
 			
 			//Find dead.arc files
 			const char **pathp = (const char *[]){
-				"dead1.tim", //BF_ArcDead_Dead1
-				"dead2.tim", //BF_ArcDead_Dead2
-				"retry.tim", //BF_ArcDead_Retry
+				"dead1.tim", //shadowhs_ArcDead_Dead1
+				"dead2.tim", //shadowhs_ArcDead_Dead2
+				"retry.tim", //shadowhs_ArcDead_Retry
 				NULL
 			};
 			IO_Data *arc_ptr = this->arc_ptr;
@@ -368,7 +374,7 @@ void Char_BF_SetAnim(Character *character, u8 anim)
 				*arc_ptr++ = Archive_Find(this->arc_main, *pathp);
 			
 			//Load retry art
-			Gfx_LoadTex(&this->tex_retry, this->arc_ptr[BF_ArcDead_Retry], 0);
+			Gfx_LoadTex(&this->tex_retry, this->arc_ptr[shadowhs_ArcDead_Retry], 0);
 			break;
 	}
 	
@@ -377,32 +383,32 @@ void Char_BF_SetAnim(Character *character, u8 anim)
 	Character_CheckStartSing(character);
 }
 
-void Char_BF_Free(Character *character)
+void Char_shadowhs_Free(Character *character)
 {
-	Char_BF *this = (Char_BF*)character;
+	Char_shadowhs *this = (Char_shadowhs*)character;
 	
 	//Free art
 	Mem_Free(this->arc_main);
 	Mem_Free(this->arc_dead);
 }
 
-Character *Char_BF_New(fixed_t x, fixed_t y)
+Character *Char_shadowhs_New(fixed_t x, fixed_t y)
 {
 	//Allocate boyfriend object
-	Char_BF *this = Mem_Alloc(sizeof(Char_BF));
+	Char_shadowhs *this = Mem_Alloc(sizeof(Char_shadowhs));
 	if (this == NULL)
 	{
-		sprintf(error_msg, "[Char_BF_New] Failed to allocate boyfriend object");
+		sprintf(error_msg, "[Char_shadowhs_New] Failed to allocate boyfriend object");
 		ErrorLock();
 		return NULL;
 	}
 	
 	//Initialize character
-	this->character.tick = Char_BF_Tick;
-	this->character.set_anim = Char_BF_SetAnim;
-	this->character.free = Char_BF_Free;
+	this->character.tick = Char_shadowhs_Tick;
+	this->character.set_anim = Char_shadowhs_SetAnim;
+	this->character.free = Char_shadowhs_Free;
 	
-	Animatable_Init(&this->character.animatable, char_bf_anim);
+	Animatable_Init(&this->character.animatable, char_shadowhs_anim);
 	Character_Init((Character*)this, x, y);
 	
 	//Set character information
@@ -413,19 +419,34 @@ Character *Char_BF_New(fixed_t x, fixed_t y)
 	this->character.focus_zoom = FIXED_DEC(1,1);
 	
 	//Load art
-	this->arc_main = IO_Read("\\CHAR\\BF.ARC;1");
+	this->arc_main = IO_Read("\\CHAR\\SHADOWHS.ARC;1");
 	this->arc_dead = NULL;
-	IO_FindFile(&this->file_dead_arc, "\\CHAR\\BFDEAD.ARC;1");
+	//IO_FindFile(&this->file_dead_arc, "\\CHAR\\SHADOWHSDEAD.ARC;1");
 	
 	const char **pathp = (const char *[]){
-		"bf0.tim",   //BF_ArcMain_BF0
-		"bf1.tim",   //BF_ArcMain_BF1
-		"bf2.tim",   //BF_ArcMain_BF2
-		"bf3.tim",   //BF_ArcMain_BF3
-		"bf4.tim",   //BF_ArcMain_BF4
-		"bf5.tim",   //BF_ArcMain_BF5
-		"bf6.tim",   //BF_ArcMain_BF6
-		"dead0.tim", //BF_ArcMain_Dead0
+		"idle0.tim", 
+		"idle1.tim", 
+		"idle2.tim", 
+		"idle3.tim", 
+		"idle4.tim", 
+		"idle5.tim", 
+		"idle6.tim", 
+		"left0.tim", 
+		"left1.tim",
+		"left2.tim",
+		"down0.tim",
+		"down1.tim",
+		"down2.tim",
+		"up0.tim",
+		"up1.tim",
+		"up2.tim",
+		"right0.tim",
+		"right1.tim",
+		"right2.tim",
+		"cough0.tim",
+		"cough1.tim",
+		"cough2.tim",
+		"dead0.tim", //shadowhs_ArcMain_Dead0
 		NULL
 	};
 	IO_Data *arc_ptr = this->arc_ptr;
@@ -439,11 +460,11 @@ Character *Char_BF_New(fixed_t x, fixed_t y)
 	this->retry_bump = 0;
 	
 	//Copy skull fragments
-	memcpy(this->skull, char_bf_skull, sizeof(char_bf_skull));
+	memcpy(this->skull, char_shadowhs_skull, sizeof(char_shadowhs_skull));
 	this->skull_scale = 64;
 	
 	SkullFragment *frag = this->skull;
-	for (size_t i = 0; i < COUNT_OF_MEMBER(Char_BF, skull); i++, frag++)
+	for (size_t i = 0; i < COUNT_OF_MEMBER(Char_shadowhs, skull); i++, frag++)
 	{
 		//Randomize trajectory
 		frag->xsp += RandomRange(-4, 4);

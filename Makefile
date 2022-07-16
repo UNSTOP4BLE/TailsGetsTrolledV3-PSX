@@ -32,6 +32,7 @@ SRCS = src/main.c \
        src/character/speaker.c \
        src/character/tails.c \
        src/character/sonic.c \
+       src/character/shadowhs.c \
        src/character/knuck.c \
        src/character/mom.c \
        src/character/xmasp.c \
