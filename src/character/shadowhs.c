@@ -12,6 +12,8 @@
 #include "../random.h"
 #include "../main.h"
 
+//"shadow the illegal substance abuser" -dreamcastnick
+
 //Boyfriend skull fragments
 static SkullFragment char_shadowhs_skull[15] = {
 	{ 1 * 8, -87 * 8, -13, -13},
@@ -96,12 +98,35 @@ typedef struct
 
 //Boyfriend player definitions
 static const CharFrame char_shadowhs_frame[] = {
-	{shadowhs_ArcMain_Idle0, {  0,   0, 102,  99}, { 53,  92}}, //0 idle 1
-	{shadowhs_ArcMain_Idle0, {103,   0, 102,  99}, { 53,  92}}, //1 idle 2
-	{shadowhs_ArcMain_Idle0, {  0, 100, 102, 101}, { 53,  94}}, //2 idle 3
-	{shadowhs_ArcMain_Idle0, {103, 100, 103, 104}, { 53,  97}}, //3 idle 4
-	{shadowhs_ArcMain_Idle0, {  0,   0, 103, 104}, { 53,  97}}, //4 idle 5
+	{shadowhs_ArcMain_Idle0, {  0,   0, 158, 156}, {102, 156}}, 
+	{shadowhs_ArcMain_Idle1, {  0,   0, 158, 156}, {102, 155}}, 
+	{shadowhs_ArcMain_Idle2, {  0,   0, 156, 158}, {103, 157}}, 
+	{shadowhs_ArcMain_Idle3, {  0,   0, 158, 161}, {103, 159}}, 
+	{shadowhs_ArcMain_Idle4, {  0,   0, 156, 160}, {104, 159}}, 
+	{shadowhs_ArcMain_Idle5, {  0,   0, 156, 160}, {103, 159}}, 
+	{shadowhs_ArcMain_Idle6, {  0,   0, 156, 160}, {103, 159}}, 
 	
+	{shadowhs_ArcMain_Left0, {  0,   0, 168, 166}, {109, 155}},
+	{shadowhs_ArcMain_Left1, {  0,   0, 162, 170}, {106, 156}},
+	{shadowhs_ArcMain_Left2, {  0,   0, 162, 170}, {107, 157}},
+
+	{shadowhs_ArcMain_Down0, {  0,   0, 154, 159}, { 99, 149}},
+	{shadowhs_ArcMain_Down1, {  0,   0, 154, 158}, { 99, 150}},
+	{shadowhs_ArcMain_Down2, {  0,   0, 154, 158}, { 99, 150}},
+
+	{shadowhs_ArcMain_Up0, {  0,   0, 190, 154}, { 73, 154}},
+	{shadowhs_ArcMain_Up1, {  0,   0, 182, 155}, { 72, 154}},
+	{shadowhs_ArcMain_Up2, {  0,   0, 180, 156}, { 72, 155}},
+
+	{shadowhs_ArcMain_Right0, {  0,   0, 158, 158}, {108, 157}},
+	{shadowhs_ArcMain_Right1, {  0,   0, 158, 158}, {110, 	157}},
+	{shadowhs_ArcMain_Right2, {  0,   0, 158, 158}, {111, 157}},
+
+	{shadowhs_ArcMain_Cough0, {  0,   0, 160, 155}, {  0,   0}},
+	{shadowhs_ArcMain_Cough1, {  0,   0, 160, 157}, {  0,   0}},
+	{shadowhs_ArcMain_Cough2, {  0,   0, 160, 158}, {  0,   0}},
+
+	/*
 	{shadowhs_ArcMain_Idle0, {104,   0,  96, 102}, { 56,  95}}, //5 left 1
 	{shadowhs_ArcMain_Idle0, {  0, 105,  94, 102}, { 54,  95}}, //6 left 2
 	
@@ -139,18 +164,18 @@ static const CharFrame char_shadowhs_frame[] = {
 	{shadowhs_ArcDead_Dead2, {  0,   0, 128, 128}, { 53,  98}}, //31 dead2 body twitch 0
 	{shadowhs_ArcDead_Dead2, {128,   0, 128, 128}, { 53,  98}}, //32 dead2 body twitch 1
 	{shadowhs_ArcDead_Dead2, {  0, 128, 128, 128}, { 53,  98}}, //33 dead2 balls twitch 0
-	{shadowhs_ArcDead_Dead2, {128, 128, 128, 128}, { 53,  98}}, //34 dead2 balls twitch 1
+	{shadowhs_ArcDead_Dead2, {128, 128, 128, 128}, { 53,  98}}, //34 dead2 balls twitch 1 */
 };
 
 static const Animation char_shadowhs_anim[PlayerAnim_Max] = {
-	{2, (const u8[]){ 0,  1,  2,  3,  4, ASCR_BACK, 1}}, //CharAnim_Idle
-	{2, (const u8[]){ 5,  6, ASCR_BACK, 1}},             //CharAnim_Left
+	{2, (const u8[]){ 0, 1, 2, 3, 4, 5, 6, ASCR_BACK, 0}}, //CharAnim_Idle
+	{2, (const u8[]){ 7, 8, 9, ASCR_BACK, 0}},             //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_LeftAlt
-	{2, (const u8[]){ 7,  8, ASCR_BACK, 1}},             //CharAnim_Down
+	{2, (const u8[]){ 10, 11, 12, ASCR_BACK, 0}},             //CharAnim_Down
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_DownAlt
-	{2, (const u8[]){ 9, 10, ASCR_BACK, 1}},             //CharAnim_Up
+	{2, (const u8[]){ 13, 14, 15, ASCR_BACK, 0}},             //CharAnim_Up
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_UpAlt
-	{2, (const u8[]){11, 12, ASCR_BACK, 1}},             //CharAnim_Right
+	{2, (const u8[]){ 16, 17, 18, ASCR_BACK, 0}},             //CharAnim_Right
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_RightAlt
 	
 	{1, (const u8[]){ 5, 20, 20, 21, ASCR_BACK, 1}},     //PlayerAnim_LeftMiss
