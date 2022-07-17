@@ -46,6 +46,7 @@ boolean noteshake;
 static u32 Sounds[7];
 int soundcooldown;
 int drawshit;
+char iconpath[30];
 
 #include "character/bf.h"
 #include "character/tails.h"
@@ -695,40 +696,33 @@ void Stage_BlendTexArb(Gfx_Tex *tex, const RECT *src, const POINT_FIXED *p0, con
 	Gfx_BlendTexArb(tex, src, &s0, &s1, &s2, &s3, mode);
 }
 
-//Stage HUD functions
+
 static void Stage_DrawHealth(s16 health, u8 i, s8 ox)
 {
-//Check if we should use 'dying' frame
+	//Check if we should use 'dying' frame
 	s8 dying;
-	s8 winning;
 	if (ox < 0)
-	{
-		dying = (health >= 18000) * 46;
-		winning = (health <= 2000) * 46*2;
-	}
-    else
-	{
-	dying = (health <= 2000) * 46;
-	winning = (health >= 18000) * 46*2;
-	}
-
+		dying = (health >= 18000) * 50;
+	else
+		dying = (health <= 2000) * 50;
+	
 	//Get src and dst
 	fixed_t hx = (128 << FIXED_SHIFT) * (10000 - health) / 10000;
 	RECT src = {
-		(i % 1) * 114 + dying + winning,
-		16 + (i / 1) * 46,
-		46,
-		46,
+		(i % 2) * 100 + dying,
+		16 + (i / 2) * 50,
+		50,
+		50
 	};
 	RECT_FIXED dst = {
 		hx + ox * FIXED_DEC(23,1) - FIXED_DEC(23,1),
-		FIXED_DEC(screen.SCREEN_HEIGHT2 - 32 + 4 - 23, 1),
+		FIXED_DEC(screen.SCREEN_HEIGHT2 - 32 + 4 - 28, 1),
 		src.w << FIXED_SHIFT,
 		src.h << FIXED_SHIFT
 	};
 	if (stage.downscroll)
 		dst.y = -dst.y - dst.h;
-
+	
 	dst.y += stage.noteshakey;
 	dst.x += stage.noteshakex;
 
@@ -1394,15 +1388,9 @@ void Stage_Load(StageId id, StageDiff difficulty, boolean story)
 	
 	//Load HUD textures
 	Gfx_LoadTex(&stage.tex_hud0, IO_Read("\\STAGE\\HUD0.TIM;1"), GFX_LOADTEX_FREE);
-	
-	if (id >= StageId_1_1 && id <= StageId_1_3)
-		Gfx_LoadTex(&stage.tex_hud1, IO_Read("\\STAGE\\HUD1-1.TIM;1"), GFX_LOADTEX_FREE);
-	else if	(id >= StageId_2_1 && id <= StageId_2_3)
-		Gfx_LoadTex(&stage.tex_hud1, IO_Read("\\STAGE\\HUD1-2.TIM;1"), GFX_LOADTEX_FREE);
-	else if	(id >= StageId_3_1 && id <= StageId_3_3)
-		Gfx_LoadTex(&stage.tex_hud1, IO_Read("\\STAGE\\HUD1-3.TIM;1"), GFX_LOADTEX_FREE);
-	else if	(id == StageId_4_1)
-		Gfx_LoadTex(&stage.tex_hud1, IO_Read("\\STAGE\\HUD1-4.TIM;1"), GFX_LOADTEX_FREE);
+
+	sprintf(iconpath, "\\STAGE\\HUD1-%d.TIM;1", stage.stage_def->week);
+	Gfx_LoadTex(&stage.tex_hud1, IO_Read(iconpath), GFX_LOADTEX_FREE);
 
 	//Load stage background
 	Stage_LoadStage();
