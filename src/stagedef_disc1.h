@@ -87,7 +87,7 @@
 	{ //StageId_2_3 (Tsuraran Fox)
 		//Characters
 		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_Monster_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
+		{Char_knuck_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
         {NULL},
 		{Char_GF_New,       FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
 		
@@ -157,7 +157,7 @@
 	{ //StageId_4_1 (Groovy Fox)
 		//Characters
 		{Char_BF_New,   FIXED_DEC(120,1),   FIXED_DEC(40,1)},
-		{Char_Mom_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
+		{Char_tails_New, FIXED_DEC(-120,1),  FIXED_DEC(100,1)},
         {NULL},
 		{Char_GF_New,    FIXED_DEC(-6,1),   FIXED_DEC(-5,1)},
 		

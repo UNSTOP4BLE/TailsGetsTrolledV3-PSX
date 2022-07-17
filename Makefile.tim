@@ -15,35 +15,16 @@ all: \
 	iso/stage/pause.tim \
 	iso/bf/main.arc \
 	iso/bf/dead.arc \
-	iso/bf/weeb.arc \
 	iso/tails/main.arc \
 	iso/sonic/main.arc \
 	iso/shadow/hs/main.arc \
 	iso/knuck/main.arc \
-	iso/monster/main.arc \
-	iso/pico/main.arc \
-	iso/mom/main.arc \
-	iso/mom/hair.tim \
-	iso/bf/xmas.arc \
-	iso/xmasp/main.arc \
-    iso/monster/xmas.arc \
-	iso/senpai/main.arc \
-	iso/senpaim/main.arc \
-	iso/spirit/main.arc \
 	iso/gf/main.arc \
-	iso/gf/xmas.arc \
-	iso/gf/tut.arc \
-	iso/gf/weeb.arc \
 	iso/gf/speaker.tim \
-	iso/gf/speakerx.tim \
 	iso/chapter1/back.arc \
 	iso/chapter2/back.arc \
 	iso/week3/back.arc \
 	iso/week4/back.arc \
-	iso/week4/hench.arc \
-	iso/week5/back.arc \
-	iso/week6/back.arc \
-	iso/week6/back2.tim 
 
 iso/%.tim: iso/%.png
 	tools/funkintimconv/funkintimconv $@ $<
@@ -57,7 +38,6 @@ iso/menu/menu.arc: iso/menu/back.tim iso/menu/ng.tim iso/menu/story.tim iso/menu
 # BF
 iso/bf/main.arc: iso/bf/bf0.tim iso/bf/bf1.tim iso/bf/bf2.tim iso/bf/bf3.tim iso/bf/bf4.tim iso/bf/bf5.tim iso/bf/bf6.tim iso/bf/dead0.tim
 iso/bf/dead.arc: iso/bf/dead1.tim iso/bf/dead2.tim iso/bf/retry.tim
-iso/bf/weeb.arc: iso/bf/weeb0.tim iso/bf/weeb1.tim
 
 # Tails
 iso/tails/main.arc: iso/tails/idle0.tim iso/tails/idle1.tim iso/tails/left.tim iso/tails/down.tim iso/tails/up.tim iso/tails/right.tim
@@ -71,29 +51,8 @@ iso/shadow/hs/main.arc: iso/shadow/hs/idle0.tim iso/shadow/hs/idle1.tim iso/shad
 # Knuckles
 iso/knuck/main.arc: iso/knuck/idle0.tim iso/knuck/idle1.tim iso/knuck/idle2.tim iso/knuck/idle3.tim iso/knuck/idle4.tim iso/knuck/idle5.tim iso/knuck/left0.tim iso/knuck/left1.tim iso/knuck/left2.tim iso/knuck/left3.tim iso/knuck/down0.tim iso/knuck/down1.tim iso/knuck/up0.tim iso/knuck/up1.tim iso/knuck/up2.tim iso/knuck/right0.tim iso/knuck/right1.tim
 
-# Xmas BF
-iso/bf/xmas.arc: iso/bf/xmasbf0.tim iso/bf/xmasbf1.tim iso/bf/xmasbf2.tim iso/bf/xmasbf3.tim iso/bf/xmasbf4.tim iso/bf/xmasbf5.tim iso/bf/dead0.tim
-
-# Xmas Parents
-iso/xmasp/main.arc: iso/xmasp/idle0.tim iso/xmasp/idle1.tim iso/xmasp/idle2.tim iso/xmasp/idle3.tim iso/xmasp/lefta0.tim iso/xmasp/lefta1.tim iso/xmasp/leftb0.tim iso/xmasp/leftb1.tim iso/xmasp/downa0.tim iso/xmasp/downa1.tim iso/xmasp/downb0.tim iso/xmasp/downb1.tim iso/xmasp/upa0.tim iso/xmasp/upa1.tim iso/xmasp/upb0.tim iso/xmasp/upb1.tim iso/xmasp/righta0.tim iso/xmasp/righta1.tim iso/xmasp/rightb0.tim iso/xmasp/rightb1.tim
-
-# Monster
-iso/monster/xmas.arc: iso/monster/idleb0.tim iso/monster/idleb1.tim iso/monster/leftb.tim iso/monster/downb.tim iso/monster/upb.tim iso/monster/rightb.tim
-
-iso/monster/main.arc: iso/monster/idle0.tim iso/monster/idle1.tim iso/monster/left.tim iso/monster/down.tim iso/monster/up.tim iso/monster/right.tim
-
-# Senpai
-iso/senpai/main.arc: iso/senpai/senpai0.tim iso/senpai/senpai1.tim
-iso/senpaim/main.arc: iso/senpaim/senpai0.tim iso/senpaim/senpai1.tim
-
-# Spirit
-iso/spirit/main.arc: iso/spirit/spirit0.tim iso/spirit/spirit1.tim
-
 # GF
 iso/gf/main.arc: iso/gf/gf0.tim iso/gf/gf1.tim iso/gf/gf2.tim
-iso/gf/xmas.arc: iso/gf/xmasgf0.tim iso/gf/xmasgf1.tim iso/gf/xmasgf2.tim
-iso/gf/tut.arc: iso/gf/tut0.tim iso/gf/tut1.tim
-iso/gf/weeb.arc: iso/gf/weeb0.tim iso/gf/weeb1.tim
 
 # Chapter 1
 iso/chapter1/back.arc: iso/chapter1/back0.tim 
@@ -106,12 +65,3 @@ iso/week3/back.arc: iso/week3/back0.tim iso/week3/back1.tim iso/week3/back2.tim 
 
 # Week 4
 iso/week4/back.arc: iso/week4/back0.tim 
-
-# Week 5
-iso/week5/back.arc: iso/week5/back0.tim iso/week5/back1.tim iso/week5/back2.tim iso/week5/back3.tim iso/week5/back4.tim iso/week5/back5.tim iso/week5/back6.tim 
-
-# Week6
-iso/week6/back.arc: iso/week6/back0.tim iso/week6/back1.tim
-
-# Week 7
-iso/week7/back.arc: iso/week7/back0.tim iso/week7/back1.tim iso/week7/back2.tim iso/week7/back3.tim

@@ -23,25 +23,15 @@ SRCS = src/main.c \
        src/stage/chapter2.c \
        src/stage/week3.c \
        src/stage/week4.c \
-       src/stage/week5.c \
-       src/stage/week6.c \
        src/animation.c \
        src/character.c \
        src/character/bf.c \
-       src/character/bfweeb.c \
        src/character/speaker.c \
        src/character/tails.c \
        src/character/sonic.c \
        src/character/shadowhs.c \
        src/character/knuck.c \
-       src/character/mom.c \
-       src/character/xmasp.c \
-       src/character/monster.c \
-       src/character/senpai.c \
-       src/character/senpaim.c \
-       src/character/spirit.c \
        src/character/gf.c \
-       src/character/gfweeb.c \
        src/object.c \
        src/object/combo.c \
        src/object/splash.c \

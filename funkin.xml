@@ -90,7 +90,6 @@
 				<!-- Boyfriend assets -->
 				<file name = "bf.arc" type = "data" source = "iso/bf/main.arc"/>
 				<file name = "bfdead.arc" type = "data" source = "iso/bf/dead.arc"/>
-				<file name = "bfweeb.arc" type = "data" source = "iso/bf/weeb.arc"/>
 				
 				<!-- Tails assets -->
 				<file name = "tails.arc" type = "data" source = "iso/tails/main.arc"/>
@@ -104,30 +103,9 @@
 				<!-- Knuckles assets -->
 				<file name = "knuck.arc" type = "data" source = "iso/knuck/main.arc"/>
 
-				<!-- Monster assets -->
-				<file name = "monster.arc" type = "data" source = "iso/monster/main.arc"/>
-				
-				<!-- Mom assets -->
-				<file name = "mom.arc" type = "data" source = "iso/mom/main.arc"/>
-				<file name = "momhair.tim" type = "data" source = "iso/mom/hair.tim"/>
-				
-				<!-- Christmas assets -->
-				<file name = "xmasbf.arc" type = "data" source = "iso/bf/xmas.arc"/>
-				<file name = "xmasp.arc" type = "data" source = "iso/xmasp/main.arc"/>
-				<file name = "monsterx.arc" type = "data" source = "iso/monster/xmas.arc"/>
-				
-				<!-- Senpai assets -->
-				<file name = "senpai.arc" type = "data" source = "iso/senpai/main.arc"/>
-				<file name = "senpaim.arc" type = "data" source = "iso/senpaim/main.arc"/>
-				<file name = "spirit.arc" type = "data" source = "iso/spirit/main.arc"/>
-				
 				<!-- Girlfriend assets -->
 				<file name = "gf.arc" type = "data" source = "iso/gf/main.arc"/>
-				<file name = "gftut.arc" type = "data" source = "iso/gf/tut.arc"/>
-				<file name = "gfweeb.arc" type = "data" source = "iso/gf/weeb.arc"/>
-				<file name = "gfx.arc" type = "data" source = "iso/gf/xmas.arc"/>
 				<file name = "speaker.tim" type = "data" source = "iso/gf/speaker.tim"/>
-				<file name = "speakerx.tim" type = "data" source = "iso/gf/speakerx.tim"/>
 			</dir>
 		    
 			<!-- Sound effects -->
