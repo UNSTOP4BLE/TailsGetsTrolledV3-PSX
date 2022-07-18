@@ -66,9 +66,9 @@
 				<file name = "2.2n.cht" type = "data" source = "iso/chart/taste-for-blood.json.cht"/>
 				<file name = "2.3n.cht" type = "data" source = "iso/chart/tsuraran-fox.json.cht"/>
 			</dir>
-			
-			<!-- Week 3 assets -->
-			<dir name = "week3">
+
+			<!-- Chapter 3 assets -->
+			<dir name = "ch3">
 				<!-- Background art -->
 				<file name = "back.arc" type = "data" source = "iso/week3/back.arc"/>
 				

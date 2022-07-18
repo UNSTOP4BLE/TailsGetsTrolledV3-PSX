@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 	Pad_Init();
 	Network_Init();
 	
-	Timer_Init();
+	Timer_Init(false, false);
 	
 	//Start game
 	gameloop = GameLoop_Menu;
@@ -145,11 +145,18 @@ int main(int argc, char **argv)
 				SetVideoMode(MODE_PAL);
 				SsSetTickMode(SS_TICK50);
 				stage.disp[0].screen.y = stage.disp[1].screen.y = 24;
+
+				if (stage.palcooldown == 1)
+					Timer_Init(true, true);
+				stage.palcooldown ++;
 				break;
 			default:
 				SetVideoMode(MODE_NTSC);
 				SsSetTickMode(SS_TICK60);
 				stage.disp[0].screen.y = stage.disp[1].screen.y = 0;
+				if (stage.palcooldown == 1)
+					Timer_Init(false, false);
+				stage.palcooldown ++;
 				break;
 		}
 

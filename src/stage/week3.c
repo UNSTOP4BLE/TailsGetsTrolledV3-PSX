@@ -271,7 +271,7 @@ StageBack *Back_Week3_New(void)
 	this->back.free = Back_Week3_Free;
 	
 	//Load background textures
-	IO_Data arc_back = IO_Read("\\WEEK3\\BACK.ARC;1");
+	IO_Data arc_back = IO_Read("\\CH3\\BACK.ARC;1");
 	Gfx_LoadTex(&this->tex_back0, Archive_Find(arc_back, "back0.tim"), 0);
 	Gfx_LoadTex(&this->tex_back1, Archive_Find(arc_back, "back1.tim"), 0);
 	Gfx_LoadTex(&this->tex_back2, Archive_Find(arc_back, "back2.tim"), 0);

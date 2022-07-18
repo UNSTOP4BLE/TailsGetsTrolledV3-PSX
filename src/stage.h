@@ -176,7 +176,7 @@ typedef struct
 	//Stage settings
 	boolean ghost, downscroll, middlescroll, expsync, practice, debug, palmode, widescreen, sfxmiss, songtimer;
 	boolean dascreen;
-	int screencooldown;
+	int screencooldown, palcooldown;
 	s32 mode;
 	
 	u32 offset;

@@ -1439,7 +1439,10 @@ static void Stage_LoadState(void)
 		stage.player_state[i].score = 0;
 		stage.song_beat = 0;
 		timer.secondtimer = 0;
-		timer.timer = Audio_GetLength(stage.stage_def->music_track) - 1;
+		if (stage.palmode)
+			timer.timer = Audio_GetLength(stage.stage_def->music_track);
+		else
+			timer.timer = Audio_GetLength(stage.stage_def->music_track) - 1;
 		timer.timermin = 0;
 		strcpy(stage.player_state[i].accuracy_text, "Accuracy: ?");
 		strcpy(stage.player_state[i].miss_text, "Misses: 0");
