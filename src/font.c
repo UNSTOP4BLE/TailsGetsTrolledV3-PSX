@@ -175,6 +175,49 @@ void Font_CDR_DrawCol(struct FontData *this, const char *text, fixed_t x, fixed_
 	}
 }
 
+void Font_CDR_BlendCol(struct FontData *this, const char *text, fixed_t x, fixed_t y, FontAlign align, u8 r, u8 g, u8 b, int mode)
+{
+	//Offset position based off alignment
+	switch (align)
+	{
+		case FontAlign_Left:
+			break;
+		case FontAlign_Center:
+			x -= Font_CDR_GetWidth(this, text) >> 1;
+			break;
+		case FontAlign_Right:
+			x -= Font_CDR_GetWidth(this, text);
+			break;
+	}
+	
+	//Draw string character by character
+	u8 c;
+	s16 xhold = x;
+	while ((c = *text++) != '\0')
+	{
+		if (c == '\n')
+		{
+		x = xhold;
+		y += 11;
+		}
+		//Shift and validate character
+		if ((c -= 0x20) >= 0x60)
+			continue;
+		
+		//Draw character
+		RECT src = {font_cdrmap[c].charX, font_cdrmap[c].charY, font_cdrmap[c].charW, font_cdrmap[c].charL};
+		RECT_FIXED dst = {x, y, src.w << FIXED_SHIFT, src.h << FIXED_SHIFT};
+
+		if (stage.downscroll)
+		dst.y = -dst.y - dst.h;
+
+		Stage_BlendTexCol(&this->tex, &src, &dst, stage.bump, r, g, b, mode);
+		
+		//Increment X
+		x += (font_cdrmap[c].charW - 1) << FIXED_SHIFT;
+	}
+}
+
 //Common font functions
 void Font_Draw(struct FontData *this, const char *text, s32 x, s32 y, FontAlign align)
 {

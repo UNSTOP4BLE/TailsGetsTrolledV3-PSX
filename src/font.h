@@ -36,5 +36,6 @@ typedef struct FontData
 
 //Font functions
 void FontData_Load(FontData *this, Font font);
+void Font_CDR_BlendCol(struct FontData *this, const char *text, fixed_t x, fixed_t y, FontAlign align, u8 r, u8 g, u8 b, int mode);
 
 #endif

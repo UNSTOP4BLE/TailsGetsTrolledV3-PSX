@@ -541,6 +541,41 @@ void Stage_DrawTexCol(Gfx_Tex *tex, const RECT *src, const RECT_FIXED *dst, fixe
 	Gfx_DrawTexCol(tex, src, &sdst, cr, cg, cb);
 }
 
+void Stage_BlendTexCol(Gfx_Tex *tex, const RECT *src, const RECT_FIXED *dst, fixed_t zoom, u8 cr, u8 cg, u8 cb, int mode)
+{
+	fixed_t xz = dst->x;
+	fixed_t yz = dst->y;
+	fixed_t wz = dst->w;
+	fixed_t hz = dst->h;
+
+	//Don't draw if HUD and is disabled
+	if (tex == &stage.tex_hud0 || tex == &stage.tex_hud1)
+	{
+		#ifdef STAGE_NOHUD
+			return;
+		#endif
+	}
+
+	
+	fixed_t l = (screen.SCREEN_WIDTH2  << FIXED_SHIFT) + FIXED_MUL(xz, zoom);// + FIXED_DEC(1,2);
+	fixed_t t = (screen.SCREEN_HEIGHT2 << FIXED_SHIFT) + FIXED_MUL(yz, zoom);// + FIXED_DEC(1,2);
+	fixed_t r = l + FIXED_MUL(wz, zoom);
+	fixed_t b = t + FIXED_MUL(hz, zoom);
+	
+	l >>= FIXED_SHIFT;
+	t >>= FIXED_SHIFT;
+	r >>= FIXED_SHIFT;
+	b >>= FIXED_SHIFT;
+	
+	RECT sdst = {
+		l,
+		t,
+		r - l,
+		b - t,
+	};
+	Gfx_BlendTexCol(tex, src, &sdst, cr, cg, cb, mode);
+}
+
 void Stage_DrawTex(Gfx_Tex *tex, const RECT *src, const RECT_FIXED *dst, fixed_t zoom)
 {
 	Stage_DrawTexCol(tex, src, dst, zoom, 0x80, 0x80, 0x80);
@@ -633,7 +668,6 @@ void Stage_BlendTex(Gfx_Tex *tex, const RECT *src, const RECT_FIXED *dst, fixed_
 	fixed_t wz = dst->w;
 	fixed_t hz = dst->h;
 	
-	
 	//Don't draw if HUD and is disabled
 	if (tex == &stage.tex_hud0 || tex == &stage.tex_hud1)
 	{
@@ -697,7 +731,7 @@ void Stage_BlendTexArb(Gfx_Tex *tex, const RECT *src, const POINT_FIXED *p0, con
 }
 
 
-static void Stage_DrawHealth(s16 health, u8 i, s8 ox)
+static void Stage_DrawHealth(s16 health, u8 i, s8 ox, boolean bficon)
 {
 	//Check if we should use 'dying' frame
 	s8 dying;
@@ -738,6 +772,23 @@ static void Stage_DrawHealth(s16 health, u8 i, s8 ox)
 		dst.x = dst.x;
     }
 
+    if (stage.stage_id == StageId_2_1) // drug effect
+	{
+		if (bficon)
+			dst.x += FIXED_DEC(5,1);
+		else	
+			dst.x -= FIXED_DEC(5,1);
+	
+		dst.y += FIXED_DEC(5,1);
+		Stage_BlendTex(&stage.tex_hud1, &src, &dst, FIXED_MUL(stage.bump, stage.sbump), 1);
+		
+		if (bficon)
+			dst.x -= FIXED_DEC(5,1);
+		else	
+			dst.x += FIXED_DEC(5,1);
+		dst.y -= FIXED_DEC(5,1);
+	}
+
     Stage_DrawTex(&stage.tex_hud1, &src, &dst, FIXED_MUL(stage.bump, stage.sbump));
 }
 
@@ -763,6 +814,12 @@ static void Stage_DrawHealthBar(s16 x, s32 color)
 
 	if (stage.downscroll)
 		dst.y = -dst.y - dst.h;
+	if (stage.stage_id == StageId_2_1) //drug effect
+	{
+		dst.y += FIXED_DEC(5,1);
+		Stage_BlendTexCol(&stage.tex_hud1, &src, &dst, stage.bump, red >> 1, blue >> 1, green >> 1, 1);
+		dst.y -= FIXED_DEC(5,1);
+	}
 	
 	Stage_DrawTexCol(&stage.tex_hud1, &src, &dst, stage.bump, red >> 1, blue >> 1, green >> 1);
 }
@@ -957,6 +1014,24 @@ static void Stage_DrawNotes(void)
 							note_dst.y = -note_dst.y;
 							note_dst.h = -note_dst.h;
 						}
+						
+						if (stage.stage_id == StageId_2_1) // drug effect
+						{
+							if (note->type & NOTE_FLAG_OPPONENT)
+								note_dst.x -= FIXED_DEC(5,1);
+							else
+								note_dst.x += FIXED_DEC(5,1);
+
+							note_dst.y += FIXED_DEC(5,1);
+							Stage_BlendTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump, 1);
+							
+							if (note->type & NOTE_FLAG_OPPONENT)
+								note_dst.x += FIXED_DEC(5,1);
+							else
+								note_dst.x -= FIXED_DEC(5,1);
+							note_dst.y -= FIXED_DEC(5,1);
+						}
+						
 						//draw for opponent
 						if (stage.middlescroll && note->type & NOTE_FLAG_OPPONENT)
 							Stage_BlendTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump, 1);
@@ -985,6 +1060,24 @@ static void Stage_DrawNotes(void)
 						
 						if (stage.downscroll)
 							note_dst.y = -note_dst.y - note_dst.h;
+						
+						if (stage.stage_id == StageId_2_1) // drug effect
+						{
+							if (note->type & NOTE_FLAG_OPPONENT)
+								note_dst.x -= FIXED_DEC(5,1);
+							else
+								note_dst.x += FIXED_DEC(5,1);
+
+							note_dst.y += FIXED_DEC(5,1);
+							Stage_BlendTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump, 1);
+							
+							if (note->type & NOTE_FLAG_OPPONENT)
+								note_dst.x += FIXED_DEC(5,1);
+							else
+								note_dst.x -= FIXED_DEC(5,1);
+							note_dst.y -= FIXED_DEC(5,1);
+						}
+
 						//draw for opponent
 						if (stage.middlescroll && note->type & NOTE_FLAG_OPPONENT)
 							Stage_BlendTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump, 1);
@@ -1059,11 +1152,32 @@ static void Stage_DrawNotes(void)
 				
 				if (stage.downscroll)
 					note_dst.y = -note_dst.y - note_dst.h;
+
+				if (stage.stage_id == StageId_2_1) // drug effect
+				{
+					if (note->type & NOTE_FLAG_OPPONENT)
+						note_dst.x -= FIXED_DEC(5,1);
+					else
+						note_dst.x += FIXED_DEC(5,1);
+
+					note_dst.y += FIXED_DEC(5,1);
+					Stage_BlendTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump, 1);
+					
+					if (note->type & NOTE_FLAG_OPPONENT)
+						note_dst.x += FIXED_DEC(5,1);
+					else
+						note_dst.x -= FIXED_DEC(5,1);
+					note_dst.y -= FIXED_DEC(5,1);
+				}
+
 				//draw for opponent
 				if (stage.middlescroll && note->type & NOTE_FLAG_OPPONENT)
 					Stage_BlendTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump, 1);
 				else
 					Stage_DrawTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump);
+		
+				
+
 			}
 		}
 	}
@@ -1637,6 +1751,12 @@ void Stage_Tick(void)
 				bot_dst.y += stage.noteshakey;
 				bot_dst.x += stage.noteshakex;
 				
+				if (stage.stage_id == StageId_2_1) //drug effect
+				{
+					bot_dst.y += FIXED_DEC(5,1);
+					Stage_BlendTex(&stage.tex_hud0, &bot_src, &bot_dst, stage.bump, 1);
+					bot_dst.y -= FIXED_DEC(5,1);
+				}				
 				if (!stage.debug)
 					Stage_DrawTex(&stage.tex_hud0, &bot_src, &bot_dst, stage.bump);
 			}
@@ -1836,6 +1956,20 @@ void Stage_Tick(void)
 					this->refresh_score = false;
 				}
 				
+				if (stage.stage_id == StageId_2_1) //drug effect
+				{
+					Font_CDR_BlendCol(&stage.font_cdr,
+						this->score_text,
+						(stage.mode == StageMode_2P && i == 0) ? FIXED_DEC(10,1) : FIXED_DEC(-150,1), 
+						(screen.SCREEN_HEIGHT2 - 22 + 5) << FIXED_SHIFT,
+						FontAlign_Left,
+						0x80,
+						0x80,
+						0x80,
+						1
+					);
+				}
+
 				stage.font_cdr.draw(&stage.font_cdr,
 					this->score_text,
 					(stage.mode == StageMode_2P && i == 0) ? FIXED_DEC(10,1) : FIXED_DEC(-150,1), 
@@ -1856,6 +1990,19 @@ void Stage_Tick(void)
 					else
 						strcpy(this->miss_text, "Misses: 0");
 					this->refresh_miss = false;
+				}
+				if (stage.stage_id == StageId_2_1) //drug effect
+				{
+					Font_CDR_BlendCol(&stage.font_cdr,
+						this->miss_text,
+						(stage.mode == StageMode_2P && i == 0) ? FIXED_DEC(100,1) : FIXED_DEC(-60,1), 
+						(screen.SCREEN_HEIGHT2 - 22 + 5) << FIXED_SHIFT,
+						FontAlign_Left,
+						0x80,
+						0x80,
+						0x80,
+						1
+					);
 				}
 
 				stage.font_cdr.draw(&stage.font_cdr,
@@ -1891,6 +2038,21 @@ void Stage_Tick(void)
 						strcpy(this->accuracy_text, "Accuracy: ?");	
 					this->refresh_accuracy = false;
 				}
+
+				if (stage.stage_id == StageId_2_1) //drug effect
+				{
+					Font_CDR_BlendCol(&stage.font_cdr,
+						this->accuracy_text,
+						(stage.mode == StageMode_2P && i == 0) ? FIXED_DEC(50,1) : (stage.mode == StageMode_2P && i == 1) ? FIXED_DEC(-110,1) : FIXED_DEC(39,1), 
+						(stage.mode == StageMode_2P) ? FIXED_DEC(85 + 5,1) : (screen.SCREEN_HEIGHT2 - 22 + 5) << FIXED_SHIFT,
+						FontAlign_Left,
+						0x80,
+						0x80,
+						0x80,
+						1
+					);
+				}
+
 				//sorry for this shit lmao
 				stage.font_cdr.draw(&stage.font_cdr,
 					this->accuracy_text,
@@ -1966,8 +2128,8 @@ void Stage_Tick(void)
 						stage.player_state[0].health = 0;
 
 					//Draw health heads
-					Stage_DrawHealth(stage.player_state[0].health, stage.player_state[0].character->health_i,    1);
-					Stage_DrawHealth(stage.player_state[0].health, stage.player_state[1].character->health_i, -1);
+					Stage_DrawHealth(stage.player_state[0].health, stage.player_state[0].character->health_i,    1, true);
+					Stage_DrawHealth(stage.player_state[0].health, stage.player_state[1].character->health_i, -1, false);
 					
 					//Draw health bar
 					Stage_DrawHealthBar(255 - (255 * stage.player_state[0].health / 20000), stage.opponent->health_bar);
@@ -1994,6 +2156,17 @@ void Stage_Tick(void)
 					
 					Stage_DrawStrum(i, &note_src, &note_dst);
 
+					if (stage.stage_id == StageId_2_1) // drug effect
+					{
+						note_dst.x += FIXED_DEC(5,1);
+
+						note_dst.y += FIXED_DEC(5,1);
+						Stage_BlendTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump, 1);
+						
+						note_dst.x -= FIXED_DEC(5,1);
+						note_dst.y -= FIXED_DEC(5,1);
+					}
+
 					Stage_DrawTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump);
 					
 					//Opponent
@@ -2003,6 +2176,17 @@ void Stage_Tick(void)
 					if (stage.downscroll)
 						note_dst.y = -note_dst.y - note_dst.h;
 					Stage_DrawStrum(i | 4, &note_src, &note_dst);
+
+					if (stage.stage_id == StageId_2_1) // drug effect
+					{
+						note_dst.x -= FIXED_DEC(5,1);
+
+						note_dst.y += FIXED_DEC(5,1);
+						Stage_BlendTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump, 1);
+						
+						note_dst.x += FIXED_DEC(5,1);
+						note_dst.y -= FIXED_DEC(5,1);
+					}
 
 					if (stage.middlescroll)
 						Stage_BlendTex(&stage.tex_hud0, &note_src, &note_dst, stage.bump, 1);

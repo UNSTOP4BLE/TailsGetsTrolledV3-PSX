@@ -117,20 +117,20 @@ void StageTimer_Calculate()
 
 void StageTimer_Tick()
 {
-	timer.secondtimer ++;
+	timer.secondtimer += timer_dt / 12;
 	if (timer.secondtimer >= 60)
 	{
 		timer.secondtimer = 0;
 		if (timer.timer <= 0)
 		{		
 			if (timer.timermin > 0)
-				timer.timermin --;
+				timer.timermin -= timer_dt / 12;
 			else
 				timer.timermin = 0;
 			timer.timer = 59;
 		}
 		else 
-			timer.timer --;
+			timer.timer -= timer_dt / 12;
 	}
 }
 
@@ -140,6 +140,21 @@ void StageTimer_Draw()
 	RECT_FIXED bar_dst = {FIXED_DEC(-70,1), FIXED_DEC(-110,1), FIXED_DEC(140,1), FIXED_DEC(11,1)};
 	//Draw timer
 	sprintf(timer.timer_display, "%d", timer.timermin);
+
+	if (stage.stage_id == StageId_2_1) //drug effect
+	{
+		Font_CDR_BlendCol(&stage.font_cdr,
+			timer.timer_display,
+			FIXED_DEC(-1 - 10,1) + stage.noteshakex, 
+			FIXED_DEC(-109 + 5,1) + stage.noteshakey,
+			FontAlign_Left,
+			0x80,
+			0x80,
+			0x80,
+			1
+		);
+	}
+
 	stage.font_cdr.draw(&stage.font_cdr,
 		timer.timer_display,
 		FIXED_DEC(-1 - 10,1) + stage.noteshakex, 
@@ -147,6 +162,21 @@ void StageTimer_Draw()
 		FontAlign_Left
 	);
 	sprintf(timer.timer_display, ":");
+
+	if (stage.stage_id == StageId_2_1) //drug effect
+	{
+		Font_CDR_BlendCol(&stage.font_cdr,
+			timer.timer_display,
+			FIXED_DEC(-1,1) + stage.noteshakex,
+			FIXED_DEC(-109 + 5,1) + stage.noteshakey,
+			FontAlign_Left,
+			0x80,
+			0x80,
+			0x80,
+			1
+		);
+	}
+
 	stage.font_cdr.draw(&stage.font_cdr,
 		timer.timer_display,
 		FIXED_DEC(-1,1) + stage.noteshakex,
@@ -154,11 +184,34 @@ void StageTimer_Draw()
 		FontAlign_Left
 	);
 	sprintf(timer.timer_display, "%s%d", (timer.timer > 9) ?"" :"0", timer.timer);
+	
+	if (stage.stage_id == StageId_2_1) //drug effect
+	{
+		Font_CDR_BlendCol(&stage.font_cdr,
+			timer.timer_display,
+			FIXED_DEC(-1 + 7,1) + stage.noteshakex,
+			FIXED_DEC(-109 + 5,1) + stage.noteshakey,
+			FontAlign_Left,
+			0x80,
+			0x80,
+			0x80,
+			1
+		);
+	}
+
 	stage.font_cdr.draw(&stage.font_cdr,
 		timer.timer_display,
 		FIXED_DEC(-1 + 7,1) + stage.noteshakex,
 		FIXED_DEC(-109,1) + stage.noteshakey,
 		FontAlign_Left
 	);
+
+	if (stage.stage_id == StageId_2_1) //drug effect
+	{
+		bar_dst.y += FIXED_DEC(5,1);
+		Stage_BlendTex(&stage.tex_hud0, &bar_fill, &bar_dst, stage.bump, 1);
+		bar_dst.y -= FIXED_DEC(5,1);
+	}
+
 	Stage_BlendTex(&stage.tex_hud0, &bar_fill, &bar_dst, stage.bump, 1);
 }

@@ -262,6 +262,24 @@ void Char_shadowhs_SetFrame(void *user, u8 frame)
 	}
 }
 
+static void Character_BlendParallax(Character *this, Gfx_Tex *tex, const CharFrame *cframe, fixed_t parallax)
+{
+	//Draw character
+	fixed_t x = this->x - FIXED_MUL(stage.camera.x, parallax) - FIXED_DEC(cframe->off[0],1);
+	fixed_t y = this->y - FIXED_MUL(stage.camera.y, parallax) - FIXED_DEC(cframe->off[1],1);
+	x += FIXED_DEC(5,1);
+	y += FIXED_DEC(5,1);
+	RECT src = {cframe->src[0], cframe->src[1], cframe->src[2], cframe->src[3]};
+	RECT_FIXED dst = {x, y, src.w << FIXED_SHIFT, src.h << FIXED_SHIFT};
+
+	Stage_BlendTex(tex, &src, &dst, stage.camera.bzoom, 1);
+}
+
+static void Character_Blend(Character *this, Gfx_Tex *tex, const CharFrame *cframe)
+{
+	Character_BlendParallax(this, tex, cframe, FIXED_UNIT);
+}
+
 void Char_shadowhs_Tick(Character *character)
 {
 	Char_shadowhs *this = (Char_shadowhs*)character;
@@ -296,20 +314,6 @@ void Char_shadowhs_Tick(Character *character)
 		     character->animatable.anim != PlayerAnim_RightMiss) &&
 			(stage.song_step & 0x7) == 0)
 			character->set_anim(character, CharAnim_Idle);
-		
-		//Stage specific animations
-		if (stage.note_scroll >= 0)
-		{
-			switch (stage.stage_id)
-			{
-				case StageId_1_1: //Bopeebo peace
-					if ((stage.song_step & 0x1F) == 28)
-						character->set_anim(character, PlayerAnim_Peace);
-					break;
-				default:
-					break;
-			}
-		}
 	}
 	
 	//Retry screen
@@ -420,6 +424,8 @@ void Char_shadowhs_Tick(Character *character)
 	 	Animatable_Animate(&character->animatableB, (void*)this, Char_shadowhs_SetFrame);
 	else
 		Animatable_Animate(&character->animatable, (void*)this, Char_shadowhs_SetFrame);
+
+	Character_Blend(character, &this->tex, &char_shadowhs_frame[this->frame]);
 	Character_Draw(character, &this->tex, &char_shadowhs_frame[this->frame]);
 }
 

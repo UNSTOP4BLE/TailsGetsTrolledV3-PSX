@@ -60,6 +60,7 @@ void Gfx_BlendRect(const RECT *rect, u8 r, u8 g, u8 b, u8 mode);
 void Gfx_BlitTexCol(Gfx_Tex *tex, const RECT *src, s32 x, s32 y, u8 r, u8 g, u8 b);
 void Gfx_BlitTex(Gfx_Tex *tex, const RECT *src, s32 x, s32 y);
 void Gfx_DrawTexCol(Gfx_Tex *tex, const RECT *src, const RECT *dst, u8 r, u8 g, u8 b);
+void Gfx_BlendTexCol(Gfx_Tex *tex, const RECT *src, const RECT *dst, u8 r, u8 g, u8 b, int mode);
 void Gfx_DrawTex(Gfx_Tex *tex, const RECT *src, const RECT *dst);
 void Gfx_DrawTexRotate(Gfx_Tex *tex, const RECT *src, const RECT *dst, u8 angle);
 void Gfx_BlendTexRotate(Gfx_Tex *tex, const RECT *src, const RECT *dst, u8 angle, u8 mode);
