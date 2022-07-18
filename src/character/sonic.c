@@ -185,7 +185,7 @@ Character *Char_Sonic_New(fixed_t x, fixed_t y)
 	//Set character information
 	this->character.spec = 0;
 	
-	this->character.health_i = 1;
+	this->character.health_i = 2;
 	
 	this->character.focus_x = FIXED_DEC(25,1);
 	this->character.focus_y = FIXED_DEC(-115,1);

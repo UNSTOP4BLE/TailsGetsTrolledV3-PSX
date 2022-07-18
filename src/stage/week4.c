@@ -32,14 +32,24 @@ void Back_Week4_DrawBG(StageBack *back)
 	fy = stage.camera.y;
 
 	RECT front_src = {0, 175, 255, 81};
-	RECT_FIXED front_dst = {FIXED_DEC(0,1) - fx, FIXED_DEC(0,1) - fy, FIXED_DEC(255,1), FIXED_DEC(81,1)};
+	RECT_FIXED front_dst = {FIXED_DEC(-359,1) - fx, FIXED_DEC(-6,1) - fy, FIXED_DEC(661,1), FIXED_DEC(120,1)};
+
+	if (stage.widescreen)
+	{
+		front_dst.x = FIXED_DEC(-431,1) - fx;
+		front_dst.w = FIXED_DEC(771,1);
+		stage.opponent->x = FIXED_DEC(-201,1);
+	}
+	Debug_StageMoveDebug(&front_dst, 5, fx, fy);
+	Stage_DrawTex(&this->tex_back0, &front_src, &front_dst, stage.camera.bzoom);
 
 	fx = stage.camera.x * 4 / 10;
 	fy = stage.camera.y * 4 / 10;
 
 	RECT back_src = {0, 0, 255, 174};
-	RECT_FIXED back_dst = {FIXED_DEC(0,1) - fx, FIXED_DEC(0,1) - fy, FIXED_DEC(255,1), FIXED_DEC(174,1)};
+	RECT_FIXED back_dst = {FIXED_DEC(-330,1) - fx, FIXED_DEC(-185,1) - fy, FIXED_DEC(622,1), FIXED_DEC(238,1)};
 
+	Debug_StageMoveDebug(&back_dst, 4, fx, fy);
 	Stage_DrawTex(&this->tex_back0, &back_src, &back_dst, stage.camera.bzoom);
 }
 

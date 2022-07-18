@@ -61,6 +61,14 @@ enum
 	shadowhs_ArcMain_Cough0,
 	shadowhs_ArcMain_Cough1,
 	shadowhs_ArcMain_Cough2,
+	shadowhs_ArcMain_Lmiss0,
+	shadowhs_ArcMain_Lmiss1,
+	shadowhs_ArcMain_Dmiss0,
+	shadowhs_ArcMain_Dmiss1,
+	shadowhs_ArcMain_Umiss0,
+	shadowhs_ArcMain_Umiss1,
+	shadowhs_ArcMain_Rmiss0,
+	shadowhs_ArcMain_Rmiss1,
 	shadowhs_ArcMain_Dead0, //BREAK
 	
 	shadowhs_ArcMain_Max,
@@ -119,12 +127,24 @@ static const CharFrame char_shadowhs_frame[] = {
 	{shadowhs_ArcMain_Up2, {  0,   0, 180, 156}, { 72, 155}},
 
 	{shadowhs_ArcMain_Right0, {  0,   0, 158, 158}, {108, 157}},
-	{shadowhs_ArcMain_Right1, {  0,   0, 158, 158}, {110, 	157}},
+	{shadowhs_ArcMain_Right1, {  0,   0, 158, 158}, {110, 157}},
 	{shadowhs_ArcMain_Right2, {  0,   0, 158, 158}, {111, 157}},
 
 	{shadowhs_ArcMain_Cough0, {  0,   0, 160, 155}, {  0,   0}},
 	{shadowhs_ArcMain_Cough1, {  0,   0, 160, 157}, {  0,   0}},
 	{shadowhs_ArcMain_Cough2, {  0,   0, 160, 158}, {  0,   0}},
+
+	{shadowhs_ArcMain_Lmiss0, {  0,   0, 162, 171}, {104, 157}},
+	{shadowhs_ArcMain_Lmiss1, {  0,   0, 162, 170}, {107, 157}},
+
+	{shadowhs_ArcMain_Dmiss0, {  0,   0, 154, 157}, { 98, 151}},
+	{shadowhs_ArcMain_Dmiss1, {  0,   0, 154, 157}, {101, 150}},
+
+	{shadowhs_ArcMain_Umiss0, {  0,   0, 180, 156}, { 68, 155}},
+	{shadowhs_ArcMain_Umiss1, {  0,   0, 180, 156}, { 72, 155}},
+
+	{shadowhs_ArcMain_Rmiss0, {  0,   0, 160, 159}, {111, 157}},
+	{shadowhs_ArcMain_Rmiss1, {  0,   0, 160, 158}, {112, 157}},
 
 	/*
 	{shadowhs_ArcMain_Idle0, {104,   0,  96, 102}, { 56,  95}}, //5 left 1
@@ -178,10 +198,10 @@ static const Animation char_shadowhs_anim[PlayerAnim_Max] = {
 	{2, (const u8[]){ 16, 17, 18, ASCR_BACK, 0}},             //CharAnim_Right
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_RightAlt
 	
-	{1, (const u8[]){ 5, 20, 20, 21, ASCR_BACK, 1}},     //PlayerAnim_LeftMiss
-	{1, (const u8[]){ 7, 22, 22, 23, ASCR_BACK, 1}},     //PlayerAnim_DownMiss
-	{1, (const u8[]){ 9, 24, 24, 25, ASCR_BACK, 1}},     //PlayerAnim_UpMiss
-	{1, (const u8[]){11, 26, 26, 27, ASCR_BACK, 1}},     //PlayerAnim_RightMiss
+	{1, (const u8[]){ 7, 22, 22, 23, ASCR_BACK, 0}},     //PlayerAnim_LeftMiss
+	{1, (const u8[]){10, 24, 24, 25, ASCR_BACK, 0}},     //PlayerAnim_DownMiss
+	{1, (const u8[]){13, 26, 26, 27, ASCR_BACK, 0}},     //PlayerAnim_UpMiss
+	{1, (const u8[]){16, 28, 28, 29, ASCR_BACK, 0}},     //PlayerAnim_RightMiss
 	
 	{2, (const u8[]){13, 14, 15, ASCR_BACK, 1}},         //PlayerAnim_Peace
 	{2, (const u8[]){16, 17, 18, 19, ASCR_REPEAT}},      //PlayerAnim_Sweat
@@ -439,8 +459,8 @@ Character *Char_shadowhs_New(fixed_t x, fixed_t y)
 	//Set character information
 	this->character.spec = CHAR_SPEC_MISSANIM;
 	
-	this->character.focus_x = FIXED_DEC(-50,1);
-	this->character.focus_y = FIXED_DEC(-65,1);
+	this->character.focus_x = FIXED_DEC(40 - 89,1);
+	this->character.focus_y = FIXED_DEC(-65 - 42,1);
 	this->character.focus_zoom = FIXED_DEC(1,1);
 	
 	//Load art
@@ -471,6 +491,14 @@ Character *Char_shadowhs_New(fixed_t x, fixed_t y)
 		"cough0.tim",
 		"cough1.tim",
 		"cough2.tim",
+		"lmiss0.tim", 
+		"lmiss1.tim",
+		"dmiss0.tim",
+		"dmiss1.tim",
+		"umiss0.tim",
+		"umiss1.tim",
+		"rmiss0.tim",
+		"rmiss1.tim",
 		"dead0.tim", //shadowhs_ArcMain_Dead0
 		NULL
 	};

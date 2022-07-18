@@ -52,8 +52,8 @@
 	
 	{ //StageId_2_1 (High Shovel)
 		//Characters
-		{Char_shadowhs_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_knuck_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
+		{Char_shadowhs_New,      FIXED_DEC(89,1),   FIXED_DEC(42,1)},
+		{Char_knuck_New,  FIXED_DEC(-173,1),   FIXED_DEC(42,1)},
         {NULL},
 		{NULL},
 		

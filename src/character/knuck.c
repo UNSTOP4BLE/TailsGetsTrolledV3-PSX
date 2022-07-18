@@ -155,8 +155,12 @@ Character *Char_knuck_New(fixed_t x, fixed_t y)
 	
 	this->character.health_i = 1;
 	
-	this->character.focus_x = FIXED_DEC(65,1);
-	this->character.focus_y = FIXED_DEC(-115,1);
+	if (stage.widescreen)
+		this->character.focus_x = FIXED_DEC(-144 - -201,1);
+	else
+		this->character.focus_x = FIXED_DEC(1,1);
+	
+	this->character.focus_y = FIXED_DEC(-65 - 42,1);
 	this->character.focus_zoom = FIXED_DEC(1,1);
 	
 	//Load art
