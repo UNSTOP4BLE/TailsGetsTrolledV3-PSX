@@ -31,6 +31,9 @@ enum
 	knuck_ArcMain_Up2,
 	knuck_ArcMain_Right0,
 	knuck_ArcMain_Right1,
+	knuck_ArcMain_Cough0,
+	knuck_ArcMain_Cough1,
+	knuck_ArcMain_Cough2,
 	
 	knuck_Arc_Max,
 };
@@ -74,6 +77,10 @@ static const CharFrame char_knuck_frame[] = {
 	{knuck_ArcMain_Right0, {115,   0, 113, 160}, { 42, 160}}, 
 	{knuck_ArcMain_Right1, {  0,   0, 112, 160}, { 42, 160}},
 	{knuck_ArcMain_Right1, {112,   0, 112, 160}, { 41, 160}}, 
+
+	{knuck_ArcMain_Cough0, {  0,   0, 152, 137}, { 74, 136}}, 
+	{knuck_ArcMain_Cough1, {  0,   0, 150, 141}, { 75, 140}}, 
+	{knuck_ArcMain_Cough2, {  0,   0, 152, 140}, { 75, 139}}, 
 };
 
 static const Animation char_knuck_anim[CharAnim_Max] = {
@@ -81,6 +88,18 @@ static const Animation char_knuck_anim[CharAnim_Max] = {
 	{2, (const u8[]){ 6, 7, 8, 9, ASCR_BACK, 0}},         //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
 	{2, (const u8[]){ 10, 11, 12, ASCR_BACK, 0}},         //CharAnim_Down
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_DownAlt
+	{2, (const u8[]){ 13, 14, 15, ASCR_BACK, 0}},         //CharAnim_Up
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
+	{2, (const u8[]){ 16, 17, 18, 19, ASCR_BACK, 0}},         //CharAnim_Right
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_RightAlt
+};
+
+static const Animation char_knuck_animB[CharAnim_Max] = {
+	{2, (const u8[]){ 0, 1, 2, 3, 4, 5, ASCR_BACK, 0}}, //CharAnim_Idle
+	{2, (const u8[]){ 6, 7, 8, 9, ASCR_BACK, 0}},         //CharAnim_Left
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
+	{2, (const u8[]){ 20, 21, 22, ASCR_BACK, 0}},         //CharAnim_Down
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_DownAlt
 	{2, (const u8[]){ 13, 14, 15, ASCR_BACK, 0}},         //CharAnim_Up
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
@@ -112,7 +131,12 @@ void Char_knuck_Tick(Character *character)
 		Character_PerformIdle(character);
 	
 	//Animate and draw
-	Animatable_Animate(&character->animatable, (void*)this, Char_knuck_SetFrame);
+	if ((stage.song_beat >= 165 && stage.song_beat <= 168) ||
+		(stage.song_beat >= 266 && stage.song_beat <= 268) ||
+		(stage.song_beat >= 325 && stage.song_beat <= 327))	
+	 	Animatable_Animate(&character->animatableB, (void*)this, Char_knuck_SetFrame);
+	else
+		Animatable_Animate(&character->animatable, (void*)this, Char_knuck_SetFrame);
 	Character_Draw(character, &this->tex, &char_knuck_frame[this->frame]);
 }
 
@@ -120,6 +144,7 @@ void Char_knuck_SetAnim(Character *character, u8 anim)
 {
 	//Set animation
 	Animatable_SetAnim(&character->animatable, anim);
+	Animatable_SetAnim(&character->animatableB, anim);
 	Character_CheckStartSing(character);
 }
 
@@ -148,6 +173,7 @@ Character *Char_knuck_New(fixed_t x, fixed_t y)
 	this->character.free = Char_knuck_Free;
 	
 	Animatable_Init(&this->character.animatable, char_knuck_anim);
+	Animatable_Init(&this->character.animatableB, char_knuck_animB);
 	Character_Init((Character*)this, x, y);
 	
 	//Set character information
@@ -184,6 +210,9 @@ Character *Char_knuck_New(fixed_t x, fixed_t y)
 		"up2.tim",    //knuck_ArcMain_Up
 		"right0.tim", //knuck_ArcMain_Right
 		"right1.tim", //knuck_ArcMain_Right
+		"cough0.tim", //knuck_ArcMain_Right
+		"cough1.tim", //knuck_ArcMain_Right
+		"cough2.tim", //knuck_ArcMain_Right
 		NULL
 	};
 	IO_Data *arc_ptr = this->arc_ptr;

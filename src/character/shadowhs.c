@@ -130,9 +130,9 @@ static const CharFrame char_shadowhs_frame[] = {
 	{shadowhs_ArcMain_Right1, {  0,   0, 158, 158}, {110, 157}},
 	{shadowhs_ArcMain_Right2, {  0,   0, 158, 158}, {111, 157}},
 
-	{shadowhs_ArcMain_Cough0, {  0,   0, 160, 155}, {  0,   0}},
-	{shadowhs_ArcMain_Cough1, {  0,   0, 160, 157}, {  0,   0}},
-	{shadowhs_ArcMain_Cough2, {  0,   0, 160, 158}, {  0,   0}},
+	{shadowhs_ArcMain_Cough0, {  0,   0, 160, 155}, {118, 155}},
+	{shadowhs_ArcMain_Cough1, {  0,   0, 160, 157}, {113, 156}},
+	{shadowhs_ArcMain_Cough2, {  0,   0, 160, 158}, {112, 157}},
 
 	{shadowhs_ArcMain_Lmiss0, {  0,   0, 162, 171}, {104, 157}},
 	{shadowhs_ArcMain_Lmiss1, {  0,   0, 162, 170}, {107, 157}},
@@ -203,8 +203,38 @@ static const Animation char_shadowhs_anim[PlayerAnim_Max] = {
 	{1, (const u8[]){13, 26, 26, 27, ASCR_BACK, 0}},     //PlayerAnim_UpMiss
 	{1, (const u8[]){16, 28, 28, 29, ASCR_BACK, 0}},     //PlayerAnim_RightMiss
 	
-	{2, (const u8[]){13, 14, 15, ASCR_BACK, 1}},         //PlayerAnim_Peace
-	{2, (const u8[]){16, 17, 18, 19, ASCR_REPEAT}},      //PlayerAnim_Sweat
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},         //PlayerAnim_Peace
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},      //PlayerAnim_Sweat
+	
+	{5, (const u8[]){28, 29, 30, 31, 31, 31, 31, 31, 31, 31, ASCR_CHGANI, PlayerAnim_Dead1}}, //PlayerAnim_Dead0
+	{5, (const u8[]){31, ASCR_REPEAT}},                                                       //PlayerAnim_Dead1
+	{3, (const u8[]){32, 33, 34, 35, 35, 35, 35, 35, 35, 35, ASCR_CHGANI, PlayerAnim_Dead3}}, //PlayerAnim_Dead2
+	{3, (const u8[]){35, ASCR_REPEAT}},                                                       //PlayerAnim_Dead3
+	{3, (const u8[]){36, 37, 35, 35, 35, 35, 35, ASCR_CHGANI, PlayerAnim_Dead3}},             //PlayerAnim_Dead4
+	{3, (const u8[]){38, 39, 35, 35, 35, 35, 35, ASCR_CHGANI, PlayerAnim_Dead3}},             //PlayerAnim_Dead5
+	
+	{10, (const u8[]){35, 35, 35, ASCR_BACK, 1}}, //PlayerAnim_Dead4
+	{ 3, (const u8[]){38, 39, 35, ASCR_REPEAT}},  //PlayerAnim_Dead5
+};
+
+static const Animation char_shadowhs_animB[PlayerAnim_Max] = {
+	{2, (const u8[]){ 0, 1, 2, 3, 4, 5, 6, ASCR_BACK, 0}}, //CharAnim_Idle
+	{2, (const u8[]){ 7, 8, 9, ASCR_BACK, 0}},             //CharAnim_Left
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_LeftAlt
+	{2, (const u8[]){ 19, 20, 21, ASCR_BACK, 0}},             //CharAnim_Down
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_DownAlt
+	{2, (const u8[]){ 13, 14, 15, ASCR_BACK, 0}},             //CharAnim_Up
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_UpAlt
+	{2, (const u8[]){ 16, 17, 18, ASCR_BACK, 0}},             //CharAnim_Right
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //CharAnim_RightAlt
+	
+	{1, (const u8[]){ 7, 22, 22, 23, ASCR_BACK, 0}},     //PlayerAnim_LeftMiss
+	{1, (const u8[]){10, 24, 24, 25, ASCR_BACK, 0}},     //PlayerAnim_DownMiss
+	{1, (const u8[]){13, 26, 26, 27, ASCR_BACK, 0}},     //PlayerAnim_UpMiss
+	{1, (const u8[]){16, 28, 28, 29, ASCR_BACK, 0}},     //PlayerAnim_RightMiss
+	
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},         //PlayerAnim_Peace
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},      //PlayerAnim_Sweat
 	
 	{5, (const u8[]){28, 29, 30, 31, 31, 31, 31, 31, 31, 31, ASCR_CHGANI, PlayerAnim_Dead1}}, //PlayerAnim_Dead0
 	{5, (const u8[]){31, ASCR_REPEAT}},                                                       //PlayerAnim_Dead1
@@ -383,7 +413,13 @@ void Char_shadowhs_Tick(Character *character)
 	}
 	
 	//Animate and draw character
-	Animatable_Animate(&character->animatable, (void*)this, Char_shadowhs_SetFrame);
+	
+	if ((stage.song_beat >= 182 && stage.song_beat <= 184) ||
+		(stage.song_beat >= 282 && stage.song_beat <= 284) ||
+		(stage.song_beat >= 333 && stage.song_beat <= 335))	
+	 	Animatable_Animate(&character->animatableB, (void*)this, Char_shadowhs_SetFrame);
+	else
+		Animatable_Animate(&character->animatable, (void*)this, Char_shadowhs_SetFrame);
 	Character_Draw(character, &this->tex, &char_shadowhs_frame[this->frame]);
 }
 
@@ -425,6 +461,7 @@ void Char_shadowhs_SetAnim(Character *character, u8 anim)
 	
 	//Set animation
 	Animatable_SetAnim(&character->animatable, anim);
+	Animatable_SetAnim(&character->animatableB, anim);
 	Character_CheckStartSing(character);
 }
 
@@ -454,6 +491,8 @@ Character *Char_shadowhs_New(fixed_t x, fixed_t y)
 	this->character.free = Char_shadowhs_Free;
 	
 	Animatable_Init(&this->character.animatable, char_shadowhs_anim);
+	Animatable_Init(&this->character.animatableB, char_shadowhs_animB);
+
 	Character_Init((Character*)this, x, y);
 	
 	//Set character information

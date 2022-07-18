@@ -55,6 +55,8 @@ typedef struct Character
 	
 	//Animation state
 	Animatable animatable;
+	Animatable animatableB;
+	Animatable animatableC;
 	fixed_t sing_end;
 	u16 pad_held;
 } Character;
