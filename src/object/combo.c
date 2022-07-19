@@ -39,6 +39,18 @@ boolean Obj_Combo_Tick(Object *obj)
 		hit_dst.y += stage.noteshakey;
 		hit_dst.x += stage.noteshakex;
 
+		if (stage.stage_id == StageId_2_1) //drug effect
+		{
+			hit_dst.x -= FIXED_DEC(5,1);
+			hit_dst.y += FIXED_DEC(5,1);
+
+			Stage_BlendTex(&stage.tex_hud0, &hit_src, &hit_dst, stage.bump, 1);
+
+			hit_dst.x += FIXED_DEC(5,1);
+			hit_dst.y -= FIXED_DEC(5,1);
+		}
+
+
 		Stage_DrawTex(&stage.tex_hud0, &hit_src, &hit_dst, stage.bump);
 		
 		//Apply gravity
@@ -73,6 +85,17 @@ boolean Obj_Combo_Tick(Object *obj)
 		combo_dst.y += stage.noteshakey;
 		combo_dst.x += stage.noteshakex;
 		
+		if (stage.stage_id == StageId_2_1) //drug effect
+		{
+			combo_dst.x -= FIXED_DEC(5,1);
+			combo_dst.y += FIXED_DEC(5,1);
+
+			Stage_BlendTex(&stage.tex_hud0, &combo_src, &combo_dst, stage.bump, 1);
+
+			combo_dst.x += FIXED_DEC(5,1);
+			combo_dst.y -= FIXED_DEC(5,1);
+		}
+
 		Stage_DrawTex(&stage.tex_hud0, &combo_src, &combo_dst, stage.bump);
 		
 		//Apply gravity
@@ -113,6 +136,17 @@ boolean Obj_Combo_Tick(Object *obj)
 			num_dst.y += stage.noteshakey;
 			num_dst.x += stage.noteshakex;
 			
+			if (stage.stage_id == StageId_2_1) //drug effect
+			{
+				num_dst.x -= FIXED_DEC(5,1);
+				num_dst.y += FIXED_DEC(5,1);
+
+				Stage_BlendTex(&stage.tex_hud0, &num_src, &num_dst, stage.bump, 1);
+
+				num_dst.x += FIXED_DEC(5,1);
+				num_dst.y -= FIXED_DEC(5,1);
+			}
+
 			Stage_DrawTex(&stage.tex_hud0, &num_src, &num_dst, stage.bump);
 			
 			//Apply gravity
