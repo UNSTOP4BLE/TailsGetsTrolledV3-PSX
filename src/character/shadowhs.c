@@ -504,6 +504,9 @@ Character *Char_shadowhs_New(fixed_t x, fixed_t y)
 	//Set character information
 	this->character.spec = CHAR_SPEC_MISSANIM;
 	
+	this->character.health_i = 0;
+	this->character.health_bar = 0x000000;
+
 	this->character.focus_x = FIXED_DEC(40 - 89,1);
 	this->character.focus_y = FIXED_DEC(-65 - 42,1);
 	this->character.focus_zoom = FIXED_DEC(1,1);

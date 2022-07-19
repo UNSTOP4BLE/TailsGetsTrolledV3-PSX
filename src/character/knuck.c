@@ -200,6 +200,7 @@ Character *Char_knuck_New(fixed_t x, fixed_t y)
 	this->character.spec = 0;
 	
 	this->character.health_i = 1;
+	this->character.health_bar = 0xE73A39;
 	
 	if (stage.widescreen)
 		this->character.focus_x = FIXED_DEC(-144 - -201,1);
