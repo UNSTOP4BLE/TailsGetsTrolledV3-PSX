@@ -1729,11 +1729,13 @@ void Stage_Tick(void)
 				return;
 		}
 	}
-	
 	switch (stage.state)
 	{
 		case StageState_Play:
 		{   
+			RECT screen_rect = {0, 0, screen.SCREEN_WIDTH, screen.SCREEN_HEIGHT};
+			if (stage.stage_id == StageId_2_1 && stage.song_beat > 288)
+				Gfx_BlendRect(&screen_rect, 255, 255, 255, 3);
 			if (stage.songtimer)
 				StageTimer_Draw();
 			if (stage.debug)
