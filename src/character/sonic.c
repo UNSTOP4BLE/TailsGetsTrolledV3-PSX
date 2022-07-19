@@ -94,6 +94,27 @@ static const CharFrame char_sonic_frame[] = {
 	
 	{Sonic_ArcMain_Mad5, {111,   4, 107, 155}, { 45, 152}}, //24 right 1
 	{Sonic_ArcMain_Mad6, {  5,   3, 108, 155}, { 48, 152}}, //25 right 2
+
+	{Sonic_ArcMain_Forced0, {  4,   3,  94, 148}, { 60, 145}}, //26 idle 1
+	{Sonic_ArcMain_Forced0, {102,   5,  94, 147}, { 60, 144}}, //27 idle 2
+	{Sonic_ArcMain_Forced1, {  4,   4,  94, 147}, { 60, 144}}, //28 idle 3
+	{Sonic_ArcMain_Forced1, {105,   3,  91, 149}, { 57, 146}}, //29 idle 4
+	{Sonic_ArcMain_Forced2, {  5,   8,  91, 148}, { 57, 146}}, //30 idle 5
+	{Sonic_ArcMain_Forced2, {105,   1,  94, 155}, { 58, 152}}, //31 idle 6
+	{Sonic_ArcMain_Forced3, {  4,   1,  94, 155}, { 58, 152}}, //32 idle 7
+	{Sonic_ArcMain_Forced3, {103,   2,  96, 154}, { 60, 151}}, //33 idle 8
+
+	{Sonic_ArcMain_Forced4, {  1,   5,  95, 158}, { 60, 155}}, //34 left 1
+	{Sonic_ArcMain_Forced4, {100,   5,  95, 157}, { 58, 153}}, //35 left 2
+
+	{Sonic_ArcMain_Forced5, {  3,   6,  80, 149}, { 46, 146}}, //36 down 1
+	{Sonic_ArcMain_Forced5, { 87,   6,  81, 151}, { 47, 148}}, //37 down 2
+
+	{Sonic_ArcMain_Forced6, {  7,   1,  81, 168}, { 47,  165}}, //38 up 1
+	{Sonic_ArcMain_Forced6, { 92,   1,  83, 162}, { 48, 159}}, //39 up 2
+
+	{Sonic_ArcMain_Forced7, {  1,   4, 109, 155}, { 42, 152}}, //40 right 1
+	{Sonic_ArcMain_Forced7, {113,   2, 107, 155}, { 42, 152}}, //41 right 2
 };
 
 static const Animation char_normal_anim[CharAnim_Max] = {
@@ -120,6 +141,18 @@ static const Animation char_mad_anim[CharAnim_Max] = {
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_RightAlt
 };
 
+static const Animation char_forced_anim[CharAnim_Max] = {
+	{2, (const u8[]){26, 27, 28, 29, 30, 31, 32, 33, ASCR_BACK, 0}}, //CharAnim_Idle
+	{2, (const u8[]){34, 35, ASCR_BACK, 0}},         //CharAnim_Left
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
+	{2, (const u8[]){36, 37, ASCR_BACK, 0}},         //CharAnim_Down
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_DownAlt
+	{2, (const u8[]){38, 39, ASCR_BACK, 0}},         //CharAnim_Up
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
+	{2, (const u8[]){40, 41, ASCR_BACK, 0}},         //CharAnim_Right
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_RightAlt
+};
+
 //Sonic character functions
 void Char_Sonic_SetFrame(void *user, u8 frame)
 {
@@ -142,9 +175,28 @@ void Char_Sonic_Tick(Character *character)
 	//Perform idle dance
 	if ((character->pad_held & (INPUT_LEFT | INPUT_DOWN | INPUT_UP | INPUT_RIGHT)) == 0)
 		Character_PerformIdle(character);
+
+	//zoomi
+	if (stage.song_beat == 416)
+	stage.player->focus_zoom = stage.opponent->focus_zoom = FIXED_DEC(15,10);
+
+	if (stage.song_beat == 480)
+	stage.player->focus_zoom = stage.opponent->focus_zoom = FIXED_DEC(1,1);
 	
 	//Animate and draw
+
+	//mad boi
+	if ((stage.song_beat >= 211 && stage.song_beat <= 218) || (stage.song_beat >= 288 && stage.song_beat <= 351) || (stage.song_beat >= 416))
+	Animatable_Animate(&character->animatableB, (void*)this, Char_Sonic_SetFrame);
+
+	//forced boi
+	else if ((stage.song_beat >= 351 && stage.song_beat <= 416))
+	Animatable_Animate(&character->animatableC, (void*)this, Char_Sonic_SetFrame);
+
+	//good boi
+	else
 	Animatable_Animate(&character->animatable, (void*)this, Char_Sonic_SetFrame);
+
 	Character_Draw(character, &this->tex, &char_sonic_frame[this->frame]);
 }
 
@@ -152,6 +204,8 @@ void Char_Sonic_SetAnim(Character *character, u8 anim)
 {
 	//Set animation
 	Animatable_SetAnim(&character->animatable, anim);
+	Animatable_SetAnim(&character->animatableB, anim);
+	Animatable_SetAnim(&character->animatableC, anim);
 	Character_CheckStartSing(character);
 }
 
@@ -180,6 +234,9 @@ Character *Char_Sonic_New(fixed_t x, fixed_t y)
 	this->character.free = Char_Sonic_Free;
 	
 	Animatable_Init(&this->character.animatable, char_normal_anim);
+	Animatable_Init(&this->character.animatableB, char_mad_anim);
+	Animatable_Init(&this->character.animatableC, char_forced_anim);
+
 	Character_Init((Character*)this, x, y);
 	
 	//Set character information
