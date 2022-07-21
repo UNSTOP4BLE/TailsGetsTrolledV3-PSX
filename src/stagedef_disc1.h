@@ -69,13 +69,13 @@
 	},
 	{ //StageId_2_2 (Taste For Blood)
 		//Characters
-		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_darksonic_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
+		{Char_BF_New,    FIXED_DEC(88,1),  FIXED_DEC(92,1)},
+		{Char_darksonic_New, FIXED_DEC(-115,1),  FIXED_DEC(96,1)},
         {NULL},
-		{Char_GF_New,       FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
-		
+		{Char_GF_New,     FIXED_DEC(0,1),  FIXED_DEC(-10,1)},
+
 		//Stage background
-		Back_Chapter2_New,
+		Back_Week5_New,
 		
 		//Song info
 		{FIXED_DEC(1,1),FIXED_DEC(35,10),FIXED_DEC(1,1)},

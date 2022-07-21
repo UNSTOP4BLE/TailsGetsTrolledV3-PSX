@@ -61,6 +61,7 @@ char iconpath[30];
 #include "stage/chapter2.h"
 #include "stage/week3.h"
 #include "stage/week4.h"
+#include "stage/week5.h"
 
 static const StageDef stage_defs[StageId_Max] = {
 	#include "stagedef_disc1.h"

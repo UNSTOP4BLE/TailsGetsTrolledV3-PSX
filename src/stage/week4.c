@@ -78,8 +78,6 @@ StageBack *Back_Week4_New(void)
 	IO_Data arc_back = IO_Read("\\CH4\\BACK.ARC;1");
 	Gfx_LoadTex(&this->tex_back0, Archive_Find(arc_back, "back0.tim"), 0);
 	Mem_Free(arc_back);
-	
-	Gfx_SetClear(154, 217, 234);
 
 	return (StageBack*)this;
 }
