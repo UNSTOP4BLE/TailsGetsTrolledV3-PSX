@@ -11,6 +11,7 @@ SRCS = src/main.c \
        src/menu.c \
        src/stage.c \
        src/debug.c \
+       src/mechanics.c \
        src/psx/psx.c \
        src/psx/io.c \
        src/psx/gfx.c \

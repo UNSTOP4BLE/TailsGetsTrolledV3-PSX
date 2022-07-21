@@ -279,6 +279,7 @@ void Stage_BlendTexArb(Gfx_Tex *tex, const RECT *src, const POINT_FIXED *p0, con
 //Stage functions
 void Stage_Load(StageId id, StageDiff difficulty, boolean story);
 void Stage_Unload();
+void Stage_MoveNote(int danote, int x, int y);
 void Stage_Tick();
 
 #ifdef PSXF_NETWORK

@@ -16,6 +16,7 @@
 #include "network.h"
 #include "mutil.h"
 #include "debug.h"
+#include "mechanics.h"
 
 #include "menu.h"
 #include "pause.h"
@@ -1185,6 +1186,20 @@ static void Stage_DrawNotes(void)
 	}
 }
 
+void Stage_MoveNote(int danote, int x, int y)
+{
+	//what do you expect this code to do lmao
+	if (x >= 0)
+		note_x[danote] += x;
+	else
+		note_x[danote] -= x;
+
+	if (y >= 0)
+		note_y[danote] += y;
+	else
+		note_y[danote] -= y;
+}
+
 static void Stage_CountDown(void)
 {
 	switch(stage.song_step)
@@ -1735,6 +1750,8 @@ void Stage_Tick(void)
 	{
 		case StageState_Play:
 		{   
+			if (stage.stage_id == StageId_2_2)
+				MessWithNotes();
 			RECT screen_rect = {0, 0, screen.SCREEN_WIDTH, screen.SCREEN_HEIGHT};
 			if (stage.stage_id == StageId_2_1 && stage.song_beat > 288)
 				Gfx_BlendRect(&screen_rect, 255, 255, 255, 3);
@@ -2134,13 +2151,16 @@ void Stage_Tick(void)
 					if (stage.player_state[0].health <= 0 && stage.practice)
 						stage.player_state[0].health = 0;
 
-					//Draw health heads
-					Stage_DrawHealth(stage.player_state[0].health, stage.player_state[0].character->health_i,    1, true);
-					Stage_DrawHealth(stage.player_state[0].health, stage.player_state[1].character->health_i, -1, false);
-					
-					//Draw health bar
-					Stage_DrawHealthBar(255 - (255 * stage.player_state[0].health / 20000), stage.opponent->health_bar);
-					Stage_DrawHealthBar(255, stage.player->health_bar);
+					if (!(stage.stage_id == StageId_2_2 && stage.song_step >= 140))
+					{
+						//Draw health heads
+						Stage_DrawHealth(stage.player_state[0].health, stage.player_state[0].character->health_i,    1, true);
+						Stage_DrawHealth(stage.player_state[0].health, stage.player_state[1].character->health_i, -1, false);
+						
+						//Draw health bar
+						Stage_DrawHealthBar(255 - (255 * stage.player_state[0].health / 20000), stage.opponent->health_bar);
+						Stage_DrawHealthBar(255, stage.player->health_bar);
+					}
 				}
 			
 				//Tick note splashes
