@@ -70,7 +70,7 @@
 	{ //StageId_2_2 (Taste For Blood)
 		//Characters
 		{Char_BF_New,      FIXED_DEC(56,1),   FIXED_DEC(85,1)},
-		{Char_knuck_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
+		{Char_darksonic_New,  FIXED_DEC(-90,1),   FIXED_DEC(85,1)},
         {NULL},
 		{Char_GF_New,       FIXED_DEC(0,1),  FIXED_DEC(-15,1)},
 		

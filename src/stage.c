@@ -53,6 +53,7 @@ char iconpath[30];
 #include "character/sonic.h"
 #include "character/shadowhs.h"
 #include "character/knuck.h"
+#include "character/darksonic.h"
 #include "character/gf.h"
 
 #include "stage/dummy.h"

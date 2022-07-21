@@ -31,6 +31,7 @@ SRCS = src/main.c \
        src/character/sonic.c \
        src/character/shadowhs.c \
        src/character/knuck.c \
+       src/character/darksonic.c \
        src/character/gf.c \
        src/object.c \
        src/object/combo.c \

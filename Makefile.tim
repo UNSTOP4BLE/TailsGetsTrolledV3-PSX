@@ -19,6 +19,7 @@ all: \
 	iso/sonic/main.arc \
 	iso/shadow/hs/main.arc \
 	iso/knuck/main.arc \
+	iso/sondark/main.arc \
 	iso/gf/main.arc \
 	iso/gf/speaker.tim \
 	iso/chapter1/back.arc \
@@ -50,6 +51,9 @@ iso/shadow/hs/main.arc: iso/shadow/hs/idle0.tim iso/shadow/hs/idle1.tim iso/shad
 
 # Knuckles
 iso/knuck/main.arc: iso/knuck/idle0.tim iso/knuck/idle1.tim iso/knuck/idle2.tim iso/knuck/idle3.tim iso/knuck/idle4.tim iso/knuck/idle5.tim iso/knuck/left0.tim iso/knuck/left1.tim iso/knuck/left2.tim iso/knuck/left3.tim iso/knuck/down0.tim iso/knuck/down1.tim iso/knuck/up0.tim iso/knuck/up1.tim iso/knuck/up2.tim iso/knuck/right0.tim iso/knuck/right1.tim iso/knuck/cough0.tim iso/knuck/cough1.tim iso/knuck/cough2.tim
+
+# Dark Sonic
+iso/sondark/main.arc: iso/sondark/idle0.tim iso/sondark/idle1.tim iso/sondark/idle2.tim iso/sondark/idle3.tim iso/sondark/idle4.tim iso/sondark/idle5.tim iso/sondark/idle6.tim iso/sondark/idle7.tim iso/sondark/idle8.tim iso/sondark/idle9.tim iso/sondark/idle10.tim iso/sondark/left0.tim iso/sondark/left1.tim iso/sondark/left2.tim iso/sondark/left3.tim iso/sondark/down0.tim iso/sondark/down1.tim iso/sondark/down2.tim iso/sondark/down3.tim iso/sondark/up0.tim iso/sondark/up1.tim iso/sondark/right0.tim iso/sondark/right1.tim iso/sondark/right2.tim iso/sondark/right3.tim
 
 # GF
 iso/gf/main.arc: iso/gf/gf0.tim iso/gf/gf1.tim iso/gf/gf2.tim
