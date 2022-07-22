@@ -187,15 +187,24 @@ void Char_Sonic_Tick(Character *character)
 
 	//mad boi
 	if ((stage.song_beat >= 211 && stage.song_beat <= 218) || (stage.song_beat >= 288 && stage.song_beat <= 351) || (stage.song_beat >= 416))
+	{
+	this->character.health_i = 3;
 	Animatable_Animate(&character->animatableB, (void*)this, Char_Sonic_SetFrame);
+	}
 
 	//forced boi
 	else if ((stage.song_beat >= 351 && stage.song_beat <= 416))
+	{
+	this->character.health_i = 4;
 	Animatable_Animate(&character->animatableC, (void*)this, Char_Sonic_SetFrame);
+	}
 
 	//good boi
 	else
+	{
+	this->character.health_i = 2;
 	Animatable_Animate(&character->animatable, (void*)this, Char_Sonic_SetFrame);
+	}
 
 	Character_Draw(character, &this->tex, &char_sonic_frame[this->frame]);
 }
@@ -247,6 +256,8 @@ Character *Char_Sonic_New(fixed_t x, fixed_t y)
 	this->character.focus_x = FIXED_DEC(25,1);
 	this->character.focus_y = FIXED_DEC(-115,1);
 	this->character.focus_zoom = FIXED_DEC(1,1);
+
+	this->character.health_bar = 0xFF577DFF;
 	
 	//Load art
 	this->arc_main = IO_Read("\\CHAR\\SONIC.ARC;1");

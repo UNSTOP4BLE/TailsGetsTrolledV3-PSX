@@ -17,8 +17,7 @@ typedef struct
 	
 	//Textures
 	Gfx_Tex tex_back0; //Background
-	Gfx_Tex tex_back1; //Window
-	Gfx_Tex tex_back2; //Lightning window
+	Gfx_Tex tex_cloud; //Cloud
 } Back_Chapter2;
 
 static void DrawGrass(Gfx_Tex tex, RECT_FIXED grass_dst)
@@ -51,7 +50,6 @@ void Back_Chapter2_DrawBG(StageBack *back)
 	
 	fixed_t fx, fy;
 
-	//draw plant
 	fx = stage.camera.x;
 	fy = stage.camera.y;
 
@@ -117,6 +115,38 @@ void Back_Chapter2_DrawBG(StageBack *back)
 		tree_dst.x = FIXED_DEC(235,1) - fx;
 	Stage_DrawTex(&this->tex_back0, &tree_src, &tree_dst, stage.camera.bzoom);
 	DrawGrass(this->tex_back0, grass_dst);
+
+	fx = stage.camera.x;
+	fy = stage.camera.y;
+
+	//draw clouds
+	RECT cloud1_src = {2, 6, 193, 75};
+	RECT_FIXED cloud1_dst = {
+	FIXED_DEC(-51,1) - fx, 
+	FIXED_DEC(-117,1) - fy, 
+	FIXED_DEC(199,1),
+	FIXED_DEC(97,1)
+	};
+
+	if (stage.widescreen)
+		cloud1_dst.x = FIXED_DEC(55,1) - fx;
+	
+	Debug_StageMoveDebug(&cloud1_dst, 5, stage.camera.x, stage.camera.y);
+	Stage_DrawTex(&this->tex_cloud, &cloud1_src, &cloud1_dst, stage.camera.bzoom);
+
+	RECT cloud2_src = {25,105, 142, 44};
+	RECT_FIXED cloud2_dst = {
+	FIXED_DEC(-281,1) - fx, 
+	FIXED_DEC(-84,1) - fy, 
+	FIXED_DEC(142,1),
+	FIXED_DEC(44,1)
+	};
+
+	if (stage.widescreen)
+		cloud2_dst.x = FIXED_DEC(-368,1) - fx;
+	
+	Debug_StageMoveDebug(&cloud2_dst, 6, stage.camera.x, stage.camera.y);
+	Stage_DrawTex(&this->tex_cloud, &cloud2_src, &cloud2_dst, stage.camera.bzoom);
 }
 
 void Back_Chapter2_Free(StageBack *back)
@@ -143,6 +173,7 @@ StageBack *Back_Chapter2_New(void)
 	//Load background textures
 	IO_Data arc_back = IO_Read("\\CH2\\BACK.ARC;1");
 	Gfx_LoadTex(&this->tex_back0, Archive_Find(arc_back, "back0.tim"), 0);
+	Gfx_LoadTex(&this->tex_cloud, Archive_Find(arc_back, "cloud.tim"), 0);
 	Mem_Free(arc_back);
 
 	Gfx_SetClear(154, 217, 234);

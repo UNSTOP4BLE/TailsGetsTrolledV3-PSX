@@ -61,7 +61,7 @@ iso/gf/main.arc: iso/gf/gf0.tim iso/gf/gf1.tim iso/gf/gf2.tim
 iso/chapter1/back.arc: iso/chapter1/back0.tim 
 
 # Chapter 2
-iso/chapter2/back.arc: iso/chapter2/back0.tim 
+iso/chapter2/back.arc: iso/chapter2/back0.tim iso/chapter2/cloud.tim
 
 # Week 3
 iso/week3/back.arc: iso/week3/back0.tim iso/week3/back1.tim iso/week3/back2.tim iso/week3/back3.tim iso/week3/back4.tim 
