@@ -116,34 +116,34 @@ void Back_Chapter2_DrawBG(StageBack *back)
 	Stage_DrawTex(&this->tex_back0, &tree_src, &tree_dst, stage.camera.bzoom);
 	DrawGrass(this->tex_back0, grass_dst);
 
-	fx = stage.camera.x;
-	fy = stage.camera.y;
+	fx = stage.camera.x * 4 / 10;
+	fy = stage.camera.y * 4 / 10;
 
 	//draw clouds
 	RECT cloud1_src = {2, 6, 193, 75};
 	RECT_FIXED cloud1_dst = {
-	FIXED_DEC(-51,1) - fx, 
-	FIXED_DEC(-117,1) - fy, 
+	FIXED_DEC(-41,1) - fx, 
+	FIXED_DEC(-127,1) - fy, 
 	FIXED_DEC(199,1),
 	FIXED_DEC(97,1)
 	};
 
 	if (stage.widescreen)
-		cloud1_dst.x = FIXED_DEC(55,1) - fx;
+		cloud1_dst.x = FIXED_DEC(65,1) - fx;
 	
 	Debug_StageMoveDebug(&cloud1_dst, 5, stage.camera.x, stage.camera.y);
 	Stage_DrawTex(&this->tex_cloud, &cloud1_src, &cloud1_dst, stage.camera.bzoom);
 
 	RECT cloud2_src = {25,105, 142, 44};
 	RECT_FIXED cloud2_dst = {
-	FIXED_DEC(-281,1) - fx, 
-	FIXED_DEC(-84,1) - fy, 
+	FIXED_DEC(-261,1) - fx, 
+	FIXED_DEC(-94,1) - fy, 
 	FIXED_DEC(142,1),
 	FIXED_DEC(44,1)
 	};
 
 	if (stage.widescreen)
-		cloud2_dst.x = FIXED_DEC(-368,1) - fx;
+		cloud2_dst.x = FIXED_DEC(-348,1) - fx;
 	
 	Debug_StageMoveDebug(&cloud2_dst, 6, stage.camera.x, stage.camera.y);
 	Stage_DrawTex(&this->tex_cloud, &cloud2_src, &cloud2_dst, stage.camera.bzoom);
