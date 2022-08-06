@@ -40,3 +40,4 @@ iso/*/*.xa
 iso/*/*.cht
 
 # Big Chungus
+.DS_Store
