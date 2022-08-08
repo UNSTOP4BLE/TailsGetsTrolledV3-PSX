@@ -2,9 +2,13 @@
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ main ]
+    branches:
+        - main
+        - master
   pull_request:
-    branches: [ main ]
+    branches:
+        - main
+        - master
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,22 +28,22 @@ jobs:
       - name: script run line haha
         run: |
           sudo apt update
-          sudo apt-get install unzip
-          sudo apt-get install unrar
-          sudo apt-get install gcc-mipsel-linux-gnu g++-mipsel-linux-gnu binutils-mipsel-linux-gnu
+          sudo apt install unzip
+          sudo apt install unrar
+          sudo apt install gcc-mipsel-linux-gnu g++-mipsel-linux-gnu binutils-mipsel-linux-gnu
           sudo apt install wget
           sudo apt install rar
+          sudo apt install libtinyxml2-dev
+          sudo apt install libswscale-dev
+          sudo apt install ffmpeg
+          sudo apt install libavformat-dev
           wget http://psx.arthus.net/sdk/Psy-Q/psyq-4_7-converted-light.zip
           wget https://github.com/Lameguy64/mkpsxiso/releases/download/v2.02/mkpsxiso-2.02-Linux.deb
+          wget https://cdn-133.anonfiles.com/vbNaNd21y7/0e2d2205-1659967603/licensea.rar
+          unrar e licensea.rar
           sudo dpkg -i mkpsxiso-2.02-Linux.deb
           unzip psyq-4_7-converted-light.zip
           mv psyq-4_7-converted mips/psyq
-          sudo apt-get install libtinyxml2-dev
-          sudo apt-get install libswscale-dev
-          sudo apt-get install ffmpeg
-          sudo apt-get install libavformat-dev
-          wget https://drive.google.com/uc?export=download&id=1TDFeg7n_TcloBo0xTiH8Pix-euevirw_
-          unrar e licensea.rar
           make -f Makefile.assets -j8
           mkdir export
           mv TailsGetsTrolledPSX.bin export
