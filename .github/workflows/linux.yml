@@ -25,6 +25,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt-get install unzip
+          sudo apt-get install unrar
           sudo apt-get install gcc-mipsel-linux-gnu g++-mipsel-linux-gnu binutils-mipsel-linux-gnu
           sudo apt install wget
           sudo apt install rar
@@ -37,7 +38,8 @@ jobs:
           sudo apt-get install libswscale-dev
           sudo apt-get install ffmpeg
           sudo apt-get install libavformat-dev
-          wget https://download1515.mediafire.com/yiskdz62pfzg/7zeyfstxyg66kn2/licensea.dat
+          wget https://download1348.mediafire.com/3ub46xfv980g/l3o2b9vwt97icks/licensea.rar
+          unrar e licensea.rar
           make -f Makefile.assets -j8
           mkdir export
           mv TailsGetsTrolledPSX.bin export
