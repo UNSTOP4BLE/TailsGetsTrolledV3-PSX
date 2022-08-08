@@ -29,7 +29,6 @@ jobs:
         run: |
           sudo apt update
           sudo apt install unzip
-          sudo apt install unrar
           sudo apt install gcc-mipsel-linux-gnu g++-mipsel-linux-gnu binutils-mipsel-linux-gnu
           sudo apt install wget
           sudo apt install rar
@@ -39,7 +38,6 @@ jobs:
           sudo apt install libavformat-dev
           wget http://psx.arthus.net/sdk/Psy-Q/psyq-4_7-converted-light.zip
           wget https://github.com/Lameguy64/mkpsxiso/releases/download/v2.02/mkpsxiso-2.02-Linux.deb
-          wget https://cdn-133.anonfiles.com/vbNaNd21y7/0e2d2205-1659967603/licensea.rar
           unrar e licensea.rar
           sudo dpkg -i mkpsxiso-2.02-Linux.deb
           unzip psyq-4_7-converted-light.zip
