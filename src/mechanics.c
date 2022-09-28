@@ -7,38 +7,49 @@
 #include "stage.h"
 #include "mechanics.h"
 #include "mutil.h"
+#include "timer.h"
 
-int noteswitchcooldown;
-
-static void ChangeNoteAngle(int noteangle);
+int notex;
+int bumptable[2][4] = {
+	{1, 2, -1, -2},
+	{-1, -2, 1, 2}
+};
+static void ChangeNoteAngle(int notex);
+static boolean bumpnote(boolean left);
 
 void MessWithNotes()
 {
-	if (stage.song_beat == 36)
-		Stage_MoveNote(0, 0, 1024);
-	else if (stage.song_beat == 37)
-		Stage_MoveNote(0, 0, -2048);
+	if (timer_dt/23 == 20 || timer_dt/23 == 21 || timer_dt/23 == 22 || timer_dt/23 == 23 || timer_dt/23 == 24)
+		bumpnote(false);
 }	
 
-static void ChangeNoteAngle(int noteangle)
+static void ChangeNoteAngle(int notex)
 {
-	noteswitchcooldown ++;
+	
+	Stage_MoveNote(4, notex, 0);
+	Stage_MoveNote(5, notex, 0);
+	Stage_MoveNote(6, notex, 0);
+	Stage_MoveNote(7, notex, 0);
 
-	if (noteswitchcooldown == 1)
-	{
-		Stage_MoveNote(4, 0, noteangle - FIXED_DEC(2,1));
-		Stage_MoveNote(5, 0, noteangle - FIXED_DEC(15,10));
-		Stage_MoveNote(6, 0, noteangle - FIXED_DEC(10,10));
-		Stage_MoveNote(7, 0, noteangle - FIXED_DEC(5,10));
-
-		Stage_MoveNote(0, 0, noteangle + FIXED_DEC(5,10));
-		Stage_MoveNote(1, 0, noteangle + FIXED_DEC(10,10));
-		Stage_MoveNote(2, 0, noteangle + FIXED_DEC(15,10));
-		Stage_MoveNote(3, 0, noteangle + FIXED_DEC(2,1));
-	}
-	else if (noteswitchcooldown == 30)
-	{
-		noteangle -= FIXED_DEC(1,1);
-	}
+	Stage_MoveNote(0, notex, 0);
+	Stage_MoveNote(1, notex, 0);
+	Stage_MoveNote(2, notex, 0);
+	Stage_MoveNote(3, notex, 0);
 }
 
+static boolean bumpnote(boolean left)
+{	
+	for (int i = 0; i < 4; i++)
+	{
+		Stage_MoveNote(0, FIXED_DEC(bumptable[left][i], 1), 0);
+		Stage_MoveNote(1, FIXED_DEC(bumptable[left][i], 1), 0);
+		Stage_MoveNote(2, FIXED_DEC(bumptable[left][i], 1), 0);
+		Stage_MoveNote(3, FIXED_DEC(bumptable[left][i], 1), 0);
+		Stage_MoveNote(4, FIXED_DEC(bumptable[left][i], 1), 0);
+		Stage_MoveNote(5, FIXED_DEC(bumptable[left][i], 1), 0);
+		Stage_MoveNote(6, FIXED_DEC(bumptable[left][i], 1), 0);
+		Stage_MoveNote(7, FIXED_DEC(bumptable[left][i], 1), 0);
+		if (i == 3) 
+			return true;
+	}
+}

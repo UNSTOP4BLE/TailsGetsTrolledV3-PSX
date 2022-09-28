@@ -35,11 +35,11 @@ static void DrawGrass(Gfx_Tex tex, RECT_FIXED grass_dst)
 
 	RECT green_fill = {152, 6, 1, 1};
 	RECT_FIXED green_dst = {
-	FIXED_DEC(-screen.SCREEN_WIDTH / 2,1), 
-	grass_dst.y + FIXED_DEC(11,1), 
-	FIXED_DEC(screen.SCREEN_WIDTH,1), 
-	FIXED_DEC(120,1)
-};
+		FIXED_DEC(-screen.SCREEN_WIDTH / 2,1), 
+		grass_dst.y + FIXED_DEC(11,1), 
+		FIXED_DEC(screen.SCREEN_WIDTH,1), 
+		FIXED_DEC(120,1)
+	};
 	Stage_DrawTex(&tex, &green_fill, &green_dst, stage.camera.bzoom);
 }
 
@@ -57,25 +57,25 @@ void Back_Chapter2_DrawBG(StageBack *back)
 	RECT plant2_src = {177, 124, 17, 36};
 
 	RECT_FIXED plant_dst = {
-	FIXED_DEC(-196,1) - fx, 
-	FIXED_DEC(88,1) - fy, 
-	FIXED_DEC(68 * 2,1),
-	 FIXED_DEC(50 *2,1)
-};
+	    FIXED_DEC(-196,1) - fx, 
+		FIXED_DEC(88,1) - fy, 
+		FIXED_DEC(68 * 2,1),
+		FIXED_DEC(50 *2,1)
+	};
 
 	if (stage.widescreen)
-	plant_dst.x -= FIXED_DEC(100,1);
+		plant_dst.x -= FIXED_DEC(100,1);
 
 	Stage_DrawTex(&this->tex_back0, &plant_src, &plant_dst, stage.camera.bzoom);
 
 	RECT_FIXED plant2_dst = {
-	plant_dst.x + FIXED_DEC(280,1), 
-	plant_dst.y, 
-	FIXED_DEC(17 *2,1),
-	 FIXED_DEC(36 * 2,1)
-};
+		plant_dst.x + FIXED_DEC(280,1), 
+		plant_dst.y, 
+		FIXED_DEC(17 *2,1),
+		FIXED_DEC(36 * 2,1)
+	};
 	if (stage.widescreen)
-	plant2_dst.x += FIXED_DEC(172,1);
+		plant2_dst.x += FIXED_DEC(172,1);
 
 	Stage_DrawTex(&this->tex_back0, &plant2_src, &plant2_dst, stage.camera.bzoom);
 
@@ -84,19 +84,19 @@ void Back_Chapter2_DrawBG(StageBack *back)
 	fy = stage.camera.y * 13 / 10;
 
 	RECT_FIXED grass_dst = {
-	FIXED_DEC(-229,1) - stage.camera.x, 
-	FIXED_DEC(44,1) - stage.camera.y, 
-	FIXED_DEC(205,1), 
-	FIXED_DEC(11,1)
-}; 
+		FIXED_DEC(-229,1) - stage.camera.x, 
+		FIXED_DEC(44,1) - stage.camera.y, 
+		FIXED_DEC(205,1), 
+		FIXED_DEC(11,1)
+	}; 
 
 	RECT tree_src = {0, 0, 74, 256};
 	RECT_FIXED tree_dst = {
-	FIXED_DEC(-266,1) - fx, 
-	FIXED_DEC(-144,1) - fy, 
-	FIXED_DEC(tree_src.w,1), 
-	FIXED_DEC(tree_src.h,1)
-}; 
+		FIXED_DEC(-266,1) - fx, 
+		FIXED_DEC(-144,1) - fy, 
+		FIXED_DEC(tree_src.w,1), 
+		FIXED_DEC(tree_src.h,1)
+	}; 
 	
 	Debug_StageMoveDebug(&grass_dst, 4, stage.camera.x, stage.camera.y);
 	if (stage.widescreen)
@@ -122,10 +122,17 @@ void Back_Chapter2_DrawBG(StageBack *back)
 	//draw clouds
 	RECT cloud1_src = {2, 6, 193, 75};
 	RECT_FIXED cloud1_dst = {
+<<<<<<< Updated upstream
 	FIXED_DEC(-41,1) - fx, 
 	FIXED_DEC(-127,1) - fy, 
 	FIXED_DEC(199,1),
 	FIXED_DEC(97,1)
+=======
+		FIXED_DEC(-51,1) - fx, 
+		FIXED_DEC(-117,1) - fy, 
+		FIXED_DEC(199,1),
+		FIXED_DEC(97,1)
+>>>>>>> Stashed changes
 	};
 
 	if (stage.widescreen)
@@ -136,10 +143,17 @@ void Back_Chapter2_DrawBG(StageBack *back)
 
 	RECT cloud2_src = {25,105, 142, 44};
 	RECT_FIXED cloud2_dst = {
+<<<<<<< Updated upstream
 	FIXED_DEC(-261,1) - fx, 
 	FIXED_DEC(-94,1) - fy, 
 	FIXED_DEC(142,1),
 	FIXED_DEC(44,1)
+=======
+		FIXED_DEC(-281,1) - fx, 
+		FIXED_DEC(-84,1) - fy, 
+		FIXED_DEC(142,1),
+		FIXED_DEC(44,1)
+>>>>>>> Stashed changes
 	};
 
 	if (stage.widescreen)
