@@ -122,17 +122,10 @@ void Back_Chapter2_DrawBG(StageBack *back)
 	//draw clouds
 	RECT cloud1_src = {2, 6, 193, 75};
 	RECT_FIXED cloud1_dst = {
-<<<<<<< Updated upstream
-	FIXED_DEC(-41,1) - fx, 
-	FIXED_DEC(-127,1) - fy, 
-	FIXED_DEC(199,1),
-	FIXED_DEC(97,1)
-=======
 		FIXED_DEC(-51,1) - fx, 
 		FIXED_DEC(-117,1) - fy, 
 		FIXED_DEC(199,1),
 		FIXED_DEC(97,1)
->>>>>>> Stashed changes
 	};
 
 	if (stage.widescreen)
@@ -143,17 +136,10 @@ void Back_Chapter2_DrawBG(StageBack *back)
 
 	RECT cloud2_src = {25,105, 142, 44};
 	RECT_FIXED cloud2_dst = {
-<<<<<<< Updated upstream
-	FIXED_DEC(-261,1) - fx, 
-	FIXED_DEC(-94,1) - fy, 
-	FIXED_DEC(142,1),
-	FIXED_DEC(44,1)
-=======
-		FIXED_DEC(-281,1) - fx, 
-		FIXED_DEC(-84,1) - fy, 
+		FIXED_DEC(-261,1) - fx, 
+		FIXED_DEC(-94,1) - fy, 
 		FIXED_DEC(142,1),
 		FIXED_DEC(44,1)
->>>>>>> Stashed changes
 	};
 
 	if (stage.widescreen)
